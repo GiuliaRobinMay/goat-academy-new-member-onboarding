@@ -3,14 +3,20 @@
 A single-file interactive onboarding app for new GOAT Academy members. It combines
 the "best of both worlds" the academy asked for:
 
-1. **Your first steps** — a 6-step checklist trail (set up → watch all Academy
-   Modules → book an assessment call → start the FastTrack Roadmap → join your
-   first live class → plug into the community). Checkboxes persist per device,
-   with a progress bar and a small celebration at 100%.
-2. **Know your way around** — a new-member orientation: every sidebar space
-   (Start Here, Coaching & Support, Community Channels, Felix's Resources) with
-   what it is, when to use it, and a direct link. Opened spaces get marked
-   "Explored".
+1. **Your first steps** — an 8-step checklist trail (set up → money-back
+   guarantee rules → meet your Student Success Manager & community tour →
+   watch all Academy Modules → book an assessment call → start the FastTrack
+   Roadmap → join your first live class → plug into the community). Checkboxes
+   persist per device, with a progress bar and a small celebration at 100%.
+   The guarantee tasks are highlighted as REQUIRED, and the SSM step links to
+   each team member's "Meet …" post plus the daily Live Onboarding Q&A.
+2. **Know your way around** — a new-member orientation of the spaces beyond
+   the Start Here steps (Coaching & Support, Community Channels, Felix's
+   Resources) as flip cards: tap a card to reveal what the space is for, when
+   to use it, and a direct link. Opened spaces get marked "Explored". Cards
+   glow neon teal on hover.
+
+There's also a light/dark/auto theme toggle (top right), persisted per device.
 
 ## Files
 
@@ -20,17 +26,22 @@ the "best of both worlds" the academy asked for:
 ## How progress is saved
 
 Progress is stored in the browser's `localStorage` under the key
-`goat-onboarding-v1` (task checkboxes + explored spaces). It is per device /
-per browser. "Reset my progress" in the footer clears it.
+`goat-onboarding-v1` (task checkboxes + explored spaces); the theme choice is
+stored under `goat-theme`. Both are per device / per browser. "Reset my
+progress" in the footer clears the progress (the theme choice stays).
 
 ## Editing the content
 
 Everything editable lives in three plain data blocks near the top of the
 `<script>` in `index.html`:
 
-- `SPACE_URL` — the real space URLs (friends.goatacademy.org space IDs).
-- `STEPS` — the six steps: title, time estimate, "why" text, tasks, link chips.
-- `GROUPS` — the orientation map: groups, space names, descriptions, emoji.
+- `SPACE_URL` / `GUARANTEE_URL` — the real space and post URLs
+  (friends.goatacademy.org).
+- `TEAM` — the Student Success team names and their "Meet …" post links.
+- `STEPS` — the eight steps: title, time estimate, "why" text, tasks
+  (`important: true` renders the gold REQUIRED treatment), link chips.
+- `GROUPS` — the orientation flip cards: groups, space names, descriptions,
+  emoji.
 
 Change the text there; the page renders itself from that data.
 
