@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GOAT Academy — New Member Onboarding</title>
+<style>
+  :root{
+    --paper:#F6F7F9;
+    --card:#FFFFFF;
+    --ink:#1B2432;
+    --muted:#5B6577;
+    --line:#E2E6EC;
+    --accent:#0F7B5F;
+    --accent-deep:#0A5C47;
+    --accent-soft:#E1F1EA;
+    --gold:#A87C1F;
+    --gold-soft:#F7EFDB;
+    --tint-green:#E3F1E9;  --icon-green:#19794F;
+    --tint-blue:#E5ECF9;   --icon-blue:#3D5FB8;
+    --tint-amber:#FBEFDC;  --icon-amber:#A56A12;
+    --tint-red:#F9E7E4;    --icon-red:#B14A38;
+    --shadow:0 1px 2px rgba(27,36,50,.05),0 8px 24px -12px rgba(27,36,50,.12);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#10141C;
+      --card:#181E2A;
+      --ink:#E8EBF1;
+      --muted:#96A0B3;
+      --line:#26303F;
+      --accent:#3BCE9B;
+      --accent-deep:#7ADEBB;
+      --accent-soft:#15281F;
+      --gold:#DCB456;
+      --gold-soft:#2A2416;
+      --tint-green:#152A20;  --icon-green:#5AD49E;
+      --tint-blue:#182238;   --icon-blue:#8CA7EE;
+      --tint-amber:#2C2313;  --icon-amber:#E4B061;
+      --tint-red:#301B17;    --icon-red:#EE9280;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#10141C;
+    --card:#181E2A;
+    --ink:#E8EBF1;
+    --muted:#96A0B3;
+    --line:#26303F;
+    --accent:#3BCE9B;
+    --accent-deep:#7ADEBB;
+    --accent-soft:#15281F;
+    --gold:#DCB456;
+    --gold-soft:#2A2416;
+    --tint-green:#152A20;  --icon-green:#5AD49E;
+    --tint-blue:#182238;   --icon-blue:#8CA7EE;
+    --tint-amber:#2C2313;  --icon-amber:#E4B061;
+    --tint-red:#301B17;    --icon-red:#EE9280;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition:none !important;animation:none !important}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font:400 16px/1.6 "Avenir Next","Avenir","Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 20px 80px}
+  a{color:var(--accent-deep)}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+
+  /* ---------- hero ---------- */
+  .hero{padding:56px 0 8px;text-align:left}
+  .goat{
+    width:56px;height:56px;border-radius:16px;
+    background:var(--accent-soft);
+    display:flex;align-items:center;justify-content:center;
+    font-size:30px;margin-bottom:18px;
+  }
+  .eyebrow{
+    font:600 12px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep);
+    margin:0 0 10px;
+  }
+  h1{
+    font:800 clamp(30px,5.5vw,42px)/1.12 "Avenir Next","Avenir","Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;
+    letter-spacing:-.015em;margin:0 0 14px;text-wrap:balance;
+  }
+  .lede{font-size:18px;color:var(--muted);max-width:58ch;margin:0 0 10px}
+  .note{
+    font:italic 400 17px/1.55 Georgia,"Times New Roman",serif;
+    color:var(--ink);border-left:3px solid var(--gold);
+    padding:2px 0 2px 16px;margin:22px 0 0;max-width:56ch;
+  }
+  .note small{
+    display:block;margin-top:6px;
+    font:600 11px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
+    font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  }
+
+  /* ---------- progress ---------- */
+  .progress-card{
+    margin:30px 0 8px;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);
+  }
+  .progress-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .progress-label{font-weight:600;font-size:14px}
+  .progress-count{
+    font:500 13px/1 ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+    font-variant-numeric:tabular-nums;color:var(--muted);
+  }
+  .bar{height:8px;background:var(--line);border-radius:99px;margin-top:12px;overflow:hidden}
+  .bar-fill{height:100%;width:0%;background:var(--accent);border-radius:99px;transition:width .4s ease}
+  .done-banner{
+    display:none;margin-top:12px;padding:12px 14px;border-radius:10px;
+    background:var(--gold-soft);color:var(--gold);font-weight:600;font-size:15px;
+  }
+  .done-banner.show{display:block}
+
+  /* ---------- jump nav ---------- */
+  .jump{display:flex;gap:10px;margin:22px 0 8px;flex-wrap:wrap}
+  .jump a{
+    text-decoration:none;font-weight:600;font-size:14px;color:var(--ink);
+    background:var(--card);border:1px solid var(--line);border-radius:99px;
+    padding:8px 16px;
+  }
+  .jump a:hover{border-color:var(--accent);color:var(--accent-deep)}
+
+  /* ---------- sections ---------- */
+  section{margin-top:48px}
+  .sec-kicker{
+    font:500 12px/1 ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep);margin:0 0 8px;
+  }
+  h2{
+    font:800 clamp(22px,3.6vw,28px)/1.2 "Avenir Next","Avenir","Segoe UI",system-ui,sans-serif;
+    letter-spacing:-.01em;margin:0 0 8px;text-wrap:balance;
+  }
+  .sec-intro{color:var(--muted);max-width:60ch;margin:0 0 26px}
+
+  /* ---------- step trail ---------- */
+  .trail{list-style:none;margin:0;padding:0}
+  .step{display:grid;grid-template-columns:44px 1fr;gap:0 16px;position:relative}
+  .rail{display:flex;flex-direction:column;align-items:center}
+  .bubble{
+    width:36px;height:36px;border-radius:50%;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--card);border:2px solid var(--line);
+    font:600 14px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-variant-numeric:tabular-nums;color:var(--muted);
+    transition:background .3s,border-color .3s,color .3s;
+  }
+  .connector{width:2px;flex:1;background:var(--line);margin:4px 0;transition:background .3s}
+  .step:last-child .connector{display:none}
+  .step.complete .bubble{background:var(--accent);border-color:var(--accent);color:#fff}
+  .step.complete .connector{background:var(--accent)}
+
+  .step-card{
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    box-shadow:var(--shadow);margin-bottom:16px;overflow:hidden;
+  }
+  .step.complete .step-card{border-color:color-mix(in srgb, var(--accent) 40%, var(--line))}
+  .step-head{
+    display:flex;width:100%;align-items:center;gap:12px;text-align:left;
+    background:none;border:0;cursor:pointer;padding:16px 18px;color:inherit;font:inherit;
+  }
+  .step-head .kicker{
+    font:500 11px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    display:block;margin-bottom:5px;
+  }
+  .step-head h3{
+    font:700 18px/1.3 "Avenir Next","Avenir","Segoe UI",system-ui,sans-serif;
+    margin:0;letter-spacing:-.005em;
+  }
+  .step-head .head-text{flex:1}
+  .chev{
+    flex-shrink:0;width:24px;height:24px;color:var(--muted);
+    transition:transform .25s ease;
+  }
+  .step-head[aria-expanded="true"] .chev{transform:rotate(180deg)}
+  .step-body{padding:0 18px 18px;display:none}
+  .step-body.open{display:block}
+  .why{color:var(--muted);margin:0 0 14px;max-width:58ch}
+
+  .tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+  .tasks label{
+    display:flex;gap:12px;align-items:flex-start;cursor:pointer;
+    padding:8px 10px;border-radius:8px;
+  }
+  .tasks label:hover{background:var(--accent-soft)}
+  .tasks input{
+    appearance:none;-webkit-appearance:none;flex-shrink:0;
+    width:20px;height:20px;margin:2px 0 0;border-radius:6px;
+    border:2px solid var(--line);background:var(--card);cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;
+    transition:background .15s,border-color .15s;
+  }
+  .tasks input:checked{background:var(--accent);border-color:var(--accent)}
+  .tasks input:checked::after{
+    content:"";width:10px;height:6px;margin-top:-2px;
+    border:2px solid #fff;border-top:0;border-right:0;transform:rotate(-45deg);
+  }
+  .tasks input:checked + span{color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb, var(--muted) 55%, transparent)}
+  .tasks .hint{display:block;font-size:13px;color:var(--muted);text-decoration:none}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .chip{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:13.5px;font-weight:600;text-decoration:none;
+    color:var(--accent-deep);background:var(--accent-soft);
+    border:1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    border-radius:99px;padding:7px 14px;
+  }
+  .chip:hover{border-color:var(--accent)}
+  .chip .arrow{font-size:12px}
+
+  /* ---------- space map ---------- */
+  .explored-count{
+    font:500 13px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-variant-numeric:tabular-nums;color:var(--muted);
+  }
+  .group{margin-bottom:30px}
+  .group-head{
+    display:flex;align-items:center;gap:10px;margin:0 0 12px;
+  }
+  .group-head h3{
+    font:700 13px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
+    letter-spacing:.12em;text-transform:uppercase;margin:0;
+  }
+  .group-head .rule{flex:1;height:1px;background:var(--line)}
+  .space-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media (max-width:640px){.space-grid{grid-template-columns:1fr}}
+  .space{
+    position:relative;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;padding:14px 15px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .space-top{display:flex;align-items:center;gap:10px}
+  .space-icon{
+    width:36px;height:36px;border-radius:10px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:18px;
+  }
+  .space h4{font:700 15px/1.3 "Avenir Next","Segoe UI",system-ui,sans-serif;margin:0;letter-spacing:-.005em}
+  .space .what{font-size:14px;color:var(--ink);margin:0}
+  .space .when{font-size:13px;color:var(--muted);margin:0}
+  .when b{font-weight:600;color:var(--muted)}
+  .space-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;padding-top:2px}
+  .open-link{font-size:13.5px;font-weight:600;text-decoration:none;color:var(--accent-deep)}
+  .open-link:hover{text-decoration:underline}
+  .visited-mark{
+    display:none;font-size:12px;font-weight:600;color:var(--accent-deep);
+    background:var(--accent-soft);border-radius:99px;padding:3px 10px;
+  }
+  .space.visited .visited-mark{display:inline-block}
+
+  /* ---------- help strip / footer ---------- */
+  .help-strip{
+    margin-top:52px;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;padding:20px 22px;box-shadow:var(--shadow);
+    display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;
+  }
+  .help-strip .emoji{font-size:26px;line-height:1.3}
+  .help-strip .txt{flex:1;min-width:220px}
+  .help-strip h3{margin:0 0 4px;font:700 16px/1.3 "Avenir Next","Segoe UI",system-ui,sans-serif}
+  .help-strip p{margin:0;font-size:14.5px;color:var(--muted)}
+  footer{
+    margin-top:36px;padding-top:20px;border-top:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+    font-size:13px;color:var(--muted);
+  }
+  .reset{background:none;border:0;padding:0;font:inherit;color:var(--muted);text-decoration:underline;cursor:pointer}
+  .reset:hover{color:var(--ink)}
+
+  #confetti{position:fixed;inset:0;pointer-events:none;z-index:99}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="goat" aria-hidden="true">🐐</div>
+    <p class="eyebrow">GOAT Academy · New Member Onboarding</p>
+    <h1>Welcome — here's how to start.</h1>
+    <p class="lede">Six steps take you from brand-new to trading the FastTrack Roadmap: get set up, watch the modules, get assessed by a coach, and plug into classes and coaching. Below that, a map of every space so you always know where to find things.</p>
+    <p class="note">Work through the steps in order — each one unlocks the next. Most members finish Steps 1–3 in their first two weeks.
+      <small>— Felix &amp; the coaching team</small>
+    </p>
+
+    <div class="progress-card">
+      <div class="progress-row">
+        <span class="progress-label">Your onboarding progress</span>
+        <span class="progress-count" id="progressCount">0 of 0 tasks done</span>
+      </div>
+      <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+      <div class="done-banner" id="doneBanner">🏆 That's your onboarding complete — you're officially up and running. See you in class!</div>
+    </div>
+
+    <nav class="jump" aria-label="Sections">
+      <a href="#path">1 · Your first steps</a>
+      <a href="#map">2 · Know your way around</a>
+    </nav>
+  </header>
+
+  <section id="path" aria-labelledby="path-h">
+    <p class="sec-kicker">Part 1 of 2</p>
+    <h2 id="path-h">Your first steps</h2>
+    <p class="sec-intro">Do these in order. Tick tasks off as you go — your progress is saved on this device, so you can come back any time.</p>
+    <ol class="trail" id="trail"></ol>
+  </section>
+
+  <section id="map" aria-labelledby="map-h">
+    <p class="sec-kicker">Part 2 of 2</p>
+    <h2 id="map-h">Know your way around</h2>
+    <p class="sec-intro">Every space in the sidebar, what it's for, and when to use it — grouped exactly like you see them in the community. Open one and it gets marked as explored. <span class="explored-count" id="exploredCount"></span></p>
+    <div id="spaceMap"></div>
+  </section>
+
+  <div class="help-strip">
+    <span class="emoji" aria-hidden="true">🙋</span>
+    <div class="txt">
+      <h3>Stuck on anything?</h3>
+      <p>Post in <a href="https://friends.goatacademy.org/spaces/22577709" target="_blank" rel="noopener">Ask a Coach</a> — no question is too basic — or get an instant answer any hour from <a href="https://friends.goatacademy.org/spaces/24418740" target="_blank" rel="noopener">Your AI Assistant</a>.</p>
+    </div>
+  </div>
+
+  <footer>
+    <span>GOAT Academy · New Member Onboarding</span>
+    <button class="reset" id="resetBtn" type="button">Reset my progress</button>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var SPACE_URL = {
+    step1:      "https://friends.goatacademy.org/spaces/22589736",
+    modules:    "https://friends.goatacademy.org/spaces/22577702",
+    assessment: "https://friends.goatacademy.org/spaces/24627759",
+    roadmap:    "https://friends.goatacademy.org/spaces/22721286",
+    book11:     "https://friends.goatacademy.org/spaces/22577729",
+    liveclass:  "https://friends.goatacademy.org/spaces/16767656",
+    replays:    "https://friends.goatacademy.org/spaces/20557878",
+    askcoach:   "https://friends.goatacademy.org/spaces/22577709",
+    weekly:     "https://friends.goatacademy.org/spaces/23749452",
+    wins:       "https://friends.goatacademy.org/spaces/22577718",
+    ai:         "https://friends.goatacademy.org/spaces/24418740",
+    news:       "https://friends.goatacademy.org/spaces/22592764",
+    alumni:     "https://friends.goatacademy.org/spaces/18167516",
+    notes:      "https://friends.goatacademy.org/spaces/19161480",
+    tools:      "https://friends.goatacademy.org/spaces/22780196",
+    edge:       "https://friends.goatacademy.org/spaces/23134268"
+  };
+
+  var STEPS = [
+    {
+      n:1, time:"~10 min", title:"Set yourself up",
+      why:"Everything starts in the Step 1 space: a short welcome, your account basics, and your first hello. Two minutes of setup now means you never miss a class later.",
+      tasks:[
+        {id:"s1-watch",  text:"Open Step 1: Welcome & Set Up and go through the welcome post"},
+        {id:"s1-profile",text:"Add your profile photo and name"},
+        {id:"s1-notify", text:"Turn on notifications", hint:"So you're pinged when class goes live or a coach replies to you."},
+        {id:"s1-hello",  text:"Post a short hello to introduce yourself"}
+      ],
+      links:[{label:"Open Step 1: Welcome & Set Up", url:SPACE_URL.step1}]
+    },
+    {
+      n:2, time:"self-paced", title:"Watch ALL the Academy Modules",
+      why:"The modules are your foundation — everything in classes and on the roadmap builds on them. Watching all of them is required before your assessment call, so this is the one step you can't skip.",
+      tasks:[
+        {id:"s2-start", text:"Open Step 2: Academy Modules and start with Module 1"},
+        {id:"s2-all",   text:"Watch every module, in order", hint:"Jot down questions as you go — you'll bring them to Ask a Coach or your assessment."}
+      ],
+      links:[{label:"Open Step 2: Academy Modules", url:SPACE_URL.modules}]
+    },
+    {
+      n:3, time:"~30 min call", title:"Book your assessment call",
+      why:"Everyone arrives at a different level, so nobody is forced to start from zero. On this call a coach assesses where you are and tells you exactly where on the FastTrack Roadmap to start — which parts to do, and which you can skip.",
+      tasks:[
+        {id:"s3-book",  text:"Book your assessment in Step 3: Book an Assessment Call", hint:"Only book once you've finished all the modules."},
+        {id:"s3-attend",text:"Attend the call with your coach"},
+        {id:"s3-note",  text:"Write down your starting point on the roadmap"}
+      ],
+      links:[{label:"Open Step 3: Book an Assessment Call", url:SPACE_URL.assessment}]
+    },
+    {
+      n:4, time:"ongoing", title:"Start your FastTrack Roadmap",
+      why:"The roadmap is the six-month process the whole academy runs on — your home base from here forward. Jump in at the starting point your coach gave you and work stage by stage.",
+      tasks:[
+        {id:"s4-find", text:"Open Step 3: FastTrack Roadmap and find your starting stage"},
+        {id:"s4-first",text:"Read your current stage and do its first task"}
+      ],
+      links:[{label:"Open the FastTrack Roadmap", url:SPACE_URL.roadmap}]
+    },
+    {
+      n:5, time:"this week", title:"Join your first live class",
+      why:"Classes are where the roadmap comes alive. Live group coaching runs on a regular schedule — join from the Live Group Coaching space when it shows the LIVE badge. Can't make it? Every session is recorded.",
+      tasks:[
+        {id:"s5-live",  text:"Join a live group coaching session", hint:"Open Join Live Group Coaching at class time and click into the session."},
+        {id:"s5-replay",text:"Find the Coaching Replays library", hint:"So you know where to catch up on anything you miss."},
+        {id:"s5-11",    text:"If your plan includes 1:1 coaching: book your first call", hint:"Not on a 1:1 plan? Tick this and move on."},
+        {id:"s5-report",text:"Submit your first weekly report", hint:"Your weekly check-in — it keeps you accountable and your coaches in the loop."}
+      ],
+      links:[
+        {label:"Join Live Group Coaching", url:SPACE_URL.liveclass},
+        {label:"Watch Coaching Replays", url:SPACE_URL.replays},
+        {label:"Book a 1:1 Coaching Call", url:SPACE_URL.book11},
+        {label:"Submit Weekly Report", url:SPACE_URL.weekly}
+      ]
+    },
+    {
+      n:6, time:"~15 min", title:"Plug into the community",
+      why:"You're not doing this alone. Coaches answer questions daily, the AI assistant answers instantly, and Felix drops fresh market notes and tools every week. Members who engage early progress fastest.",
+      tasks:[
+        {id:"s6-ask",  text:"Ask your first question — in Ask a Coach or Your AI Assistant"},
+        {id:"s6-felix",text:"Skim Felix's Weekly Market Notes and browse Felix's Tools"},
+        {id:"s6-news", text:"Check Academy News & Updates", hint:"Announcements, schedule changes and new releases land here."},
+        {id:"s6-win",  text:"Post your first win in Share Your Wins", hint:"Finished the modules? Had your assessment? That counts."}
+      ],
+      links:[
+        {label:"Ask a Coach", url:SPACE_URL.askcoach},
+        {label:"Your AI Assistant", url:SPACE_URL.ai},
+        {label:"Felix's Weekly Market Notes", url:SPACE_URL.notes},
+        {label:"Share Your Wins", url:SPACE_URL.wins}
+      ]
+    }
+  ];
+
+  var GROUPS = [
+    {
+      name:"Start Here", tint:"var(--tint-green)", icon:"var(--icon-green)",
+      spaces:[
+        {id:"step1", emoji:"👋", name:"Step 1: Welcome & Set Up", what:"Your very first stop — welcome video, account setup and your hello post.", when:"Day one."},
+        {id:"modules", emoji:"🎓", name:"Step 2: Academy Modules", what:"The full foundation course. Watch every module before your assessment.", when:"Your first weeks, before the assessment call."},
+        {id:"assessment", emoji:"🧭", name:"Step 3: Book an Assessment Call", what:"Book the call where a coach finds your level and starting point.", when:"As soon as all modules are done."},
+        {id:"roadmap", emoji:"📍", name:"Step 3: FastTrack Roadmap", what:"The six-month step-by-step process you follow after your assessment.", when:"From your assessment onward — this is home base."}
+      ]
+    },
+    {
+      name:"Coaching & Support", tint:"var(--tint-blue)", icon:"var(--icon-blue)",
+      spaces:[
+        {id:"book11", emoji:"🖥️", name:"Book a 1:1 Coaching Call", what:"Book private sessions with a coach.", when:"If your plan includes 1:1 coaching."},
+        {id:"liveclass", emoji:"🔴", name:"Join Live Group Coaching", what:"The live classroom — when class is on, you join from here.", when:"At class time; look for the LIVE badge."},
+        {id:"replays", emoji:"▶️", name:"Watch Coaching Replays", what:"Recordings of past classes, so you never truly miss one.", when:"Missed a session, or want to rewatch a topic."},
+        {id:"askcoach", emoji:"💬", name:"Ask a Coach", what:"Post any trading or roadmap question — a coach answers.", when:"Whenever you're stuck. No question is too basic."},
+        {id:"weekly", emoji:"✅", name:"Submit Weekly Report", what:"Your weekly check-in that keeps you accountable and your coaches informed.", when:"At the end of every week."}
+      ]
+    },
+    {
+      name:"Community Channels", tint:"var(--tint-amber)", icon:"var(--icon-amber)",
+      spaces:[
+        {id:"wins", emoji:"🏆", name:"Share Your Wins", what:"Post your wins big and small, and celebrate everyone else's.", when:"Every win. Seriously — post it."},
+        {id:"ai", emoji:"🤖", name:"Your AI Assistant", what:"A chat assistant that answers academy questions instantly.", when:"Quick questions, any hour of the day."},
+        {id:"news", emoji:"📣", name:"Academy News & Updates", what:"Official announcements — schedule changes, new tools, events.", when:"Check in a couple of times a week."},
+        {id:"alumni", emoji:"🎖️", name:"Alumni Network", what:"Connect with members who have completed the journey.", when:"For inspiration, questions and connections."}
+      ]
+    },
+    {
+      name:"Felix's Resources", tint:"var(--tint-red)", icon:"var(--icon-red)",
+      spaces:[
+        {id:"notes", emoji:"📝", name:"Felix's Weekly Market Notes", what:"Felix's read on the market, fresh every week.", when:"Weekly, before you plan your trades."},
+        {id:"tools", emoji:"🛠️", name:"Felix's Tools", what:"The tools and indicators Felix himself uses.", when:"Once you're working the roadmap."},
+        {id:"edge", emoji:"📈", name:"Market Maker's Edge", what:"Felix's advanced material on how market makers move the market.", when:"Later — once your foundations are solid."}
+      ]
+    }
+  ];
+
+  /* ---------- state ---------- */
+  var KEY = "goat-onboarding-v1";
+  var state = {tasks:{}, visited:{}};
+  try{
+    var raw = localStorage.getItem(KEY);
+    if(raw){ var p = JSON.parse(raw); state.tasks = p.tasks||{}; state.visited = p.visited||{}; }
+  }catch(e){}
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} }
+
+  /* ---------- render steps ---------- */
+  var trail = document.getElementById("trail");
+  var CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  STEPS.forEach(function(step){
+    var li = document.createElement("li");
+    li.className = "step";
+    li.dataset.step = step.n;
+
+    var tasksHtml = step.tasks.map(function(t){
+      return '<li><label><input type="checkbox" data-task="'+t.id+'"><span>'+t.text+
+        (t.hint ? '<span class="hint">'+t.hint+'</span>' : '')+'</span></label></li>';
+    }).join("");
+
+    var linksHtml = step.links.map(function(l){
+      return '<a class="chip" href="'+l.url+'" target="_blank" rel="noopener">'+l.label+' <span class="arrow">↗</span></a>';
+    }).join("");
+
+    li.innerHTML =
+      '<div class="rail"><div class="bubble">'+step.n+'</div><div class="connector"></div></div>'+
+      '<div class="step-card">'+
+        '<button class="step-head" type="button" aria-expanded="false">'+
+          '<span class="head-text"><span class="kicker">Step '+step.n+' · '+step.time+'</span>'+
+          '<h3>'+step.title+'</h3></span>'+CHEV+
+        '</button>'+
+        '<div class="step-body">'+
+          '<p class="why">'+step.why+'</p>'+
+          '<ul class="tasks">'+tasksHtml+'</ul>'+
+          '<div class="chips">'+linksHtml+'</div>'+
+        '</div>'+
+      '</div>';
+    trail.appendChild(li);
+  });
+
+  /* ---------- render space map ---------- */
+  var mapEl = document.getElementById("spaceMap");
+  GROUPS.forEach(function(g){
+    var div = document.createElement("div");
+    div.className = "group";
+    var cards = g.spaces.map(function(s){
+      return '<div class="space" data-space="'+s.id+'">'+
+        '<div class="space-top">'+
+          '<div class="space-icon" style="background:'+g.tint+'" aria-hidden="true">'+s.emoji+'</div>'+
+          '<h4>'+s.name+'</h4>'+
+        '</div>'+
+        '<p class="what">'+s.what+'</p>'+
+        '<p class="when"><b>Use it:</b> '+s.when+'</p>'+
+        '<div class="space-foot">'+
+          '<a class="open-link" href="'+SPACE_URL[s.id]+'" target="_blank" rel="noopener" data-visit="'+s.id+'">Open space →</a>'+
+          '<span class="visited-mark">✓ Explored</span>'+
+        '</div>'+
+      '</div>';
+    }).join("");
+    div.innerHTML =
+      '<div class="group-head"><h3 style="color:'+g.icon+'">'+g.name+'</h3><div class="rule"></div></div>'+
+      '<div class="space-grid">'+cards+'</div>';
+    mapEl.appendChild(div);
+  });
+
+  /* ---------- behavior ---------- */
+  var allTaskIds = [];
+  STEPS.forEach(function(s){ s.tasks.forEach(function(t){ allTaskIds.push(t.id); }); });
+  var totalSpaces = 0;
+  GROUPS.forEach(function(g){ totalSpaces += g.spaces.length; });
+
+  var barFill = document.getElementById("barFill");
+  var progressCount = document.getElementById("progressCount");
+  var doneBanner = document.getElementById("doneBanner");
+  var exploredCount = document.getElementById("exploredCount");
+  var wasComplete = false;
+
+  function stepComplete(step){
+    return step.tasks.every(function(t){ return !!state.tasks[t.id]; });
+  }
+
+  function refresh(){
+    document.querySelectorAll('input[data-task]').forEach(function(cb){
+      cb.checked = !!state.tasks[cb.dataset.task];
+    });
+    STEPS.forEach(function(step){
+      var li = trail.querySelector('[data-step="'+step.n+'"]');
+      li.classList.toggle("complete", stepComplete(step));
+    });
+    var done = allTaskIds.filter(function(id){ return !!state.tasks[id]; }).length;
+    var pct = Math.round(done / allTaskIds.length * 100);
+    barFill.style.width = pct + "%";
+    progressCount.textContent = done + " of " + allTaskIds.length + " tasks done";
+    var complete = done === allTaskIds.length;
+    doneBanner.classList.toggle("show", complete);
+    if(complete && !wasComplete){ celebrate(); }
+    wasComplete = complete;
+
+    var visited = Object.keys(state.visited).length;
+    exploredCount.textContent = "Explored " + visited + " of " + totalSpaces + " spaces.";
+    document.querySelectorAll("[data-space]").forEach(function(card){
+      card.classList.toggle("visited", !!state.visited[card.dataset.space]);
+    });
+  }
+
+  document.addEventListener("change", function(e){
+    var cb = e.target.closest("input[data-task]");
+    if(!cb) return;
+    if(cb.checked){ state.tasks[cb.dataset.task] = true; } else { delete state.tasks[cb.dataset.task]; }
+    save(); refresh();
+  });
+
+  document.addEventListener("click", function(e){
+    var head = e.target.closest(".step-head");
+    if(head){
+      var body = head.parentElement.querySelector(".step-body");
+      var open = body.classList.toggle("open");
+      head.setAttribute("aria-expanded", open ? "true" : "false");
+      return;
+    }
+    var visit = e.target.closest("[data-visit]");
+    if(visit){
+      state.visited[visit.dataset.visit] = true;
+      save(); refresh();
+    }
+  });
+
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    if(confirm("Reset all your onboarding progress on this device?")){
+      state = {tasks:{}, visited:{}};
+      save(); refresh(); openInitial();
+    }
+  });
+
+  /* open the first incomplete step; keep completed ones collapsed */
+  function openInitial(){
+    var opened = false;
+    STEPS.forEach(function(step){
+      var li = trail.querySelector('[data-step="'+step.n+'"]');
+      var head = li.querySelector(".step-head");
+      var body = li.querySelector(".step-body");
+      var shouldOpen = !stepComplete(step) && !opened;
+      if(shouldOpen) opened = true;
+      body.classList.toggle("open", shouldOpen);
+      head.setAttribute("aria-expanded", shouldOpen ? "true" : "false");
+    });
+  }
+
+  /* ---------- confetti ---------- */
+  function celebrate(){
+    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var canvas = document.getElementById("confetti");
+    var ctx = canvas.getContext("2d");
+    canvas.width = innerWidth; canvas.height = innerHeight;
+    var colors = ["#0F7B5F","#3BCE9B","#DCB456","#A87C1F","#8CA7EE"];
+    var bits = [];
+    for(var i=0;i<120;i++){
+      bits.push({
+        x: Math.random()*canvas.width, y: -20 - Math.random()*canvas.height*0.5,
+        w: 6+Math.random()*6, h: 8+Math.random()*8,
+        vy: 2+Math.random()*3, vx: -1+Math.random()*2,
+        rot: Math.random()*Math.PI, vr: -0.1+Math.random()*0.2,
+        c: colors[i%colors.length]
+      });
+    }
+    var frames = 0;
+    (function tick(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      bits.forEach(function(b){
+        b.x+=b.vx; b.y+=b.vy; b.rot+=b.vr;
+        ctx.save(); ctx.translate(b.x,b.y); ctx.rotate(b.rot);
+        ctx.fillStyle=b.c; ctx.fillRect(-b.w/2,-b.h/2,b.w,b.h); ctx.restore();
+      });
+      frames++;
+      if(frames<260){ requestAnimationFrame(tick); } else { ctx.clearRect(0,0,canvas.width,canvas.height); }
+    })();
+  }
+
+  wasComplete = allTaskIds.every(function(id){ return !!state.tasks[id]; });
+  refresh();
+  openInitial();
+})();
+</script>
+</body>
+</html>
