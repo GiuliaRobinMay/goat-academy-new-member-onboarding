@@ -16,11 +16,10 @@ the "best of both worlds" the academy asked for:
    to use it, and a direct link. Opened spaces get marked "Explored". Cards
    glow neon teal on hover.
 
-The design matches the GOAT Academy Trading Roadmap app: green→teal→blue
-gradient band, deep-blue uppercase display type, mint "From Felix & the team"
-welcome card, uppercase tabs, a sticky "Next up" + "Your progress" sidebar,
-a lime progress pill, and a circular light/dark/auto theme toggle (top
-right, persisted per device). Interactive elements keep the neon teal hover
+The design follows the GOAT Academy app color scheme (green→teal→blue
+gradient band, blue headings/links, green progress states) with the system
+font stack the apps use. There's a light/dark/auto theme toggle (top right,
+persisted per device), and interactive elements have the neon teal hover
 glow.
 
 ## Files
