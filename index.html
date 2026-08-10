@@ -6,14 +6,19 @@
 <title>GOAT Academy — New Member Onboarding</title>
 <style>
   :root{
-    --paper:#F5F8F9;
+    --paper:#FFFFFF;
     --card:#FFFFFF;
-    --ink:#152430;
-    --muted:#5A6B77;
-    --line:#DFE7EB;
-    --accent:#0B7C8C;
-    --accent-deep:#07616E;
-    --accent-soft:#DFF2F4;
+    --ink:#1F2A33;
+    --muted:#67737D;
+    --line:#E3E8EC;
+    --blue:#16699E;
+    --blue-soft:#E7F1F7;
+    --green:#2E9E4F;
+    --mint:#E9F2EC;
+    --lime:#C7F23F;
+    --on-lime:#213500;
+    --grad:linear-gradient(100deg,#0E5040 0%,#11707C 45%,#2090CF 100%);
+    --accent:#2E9E4F;
     --on-accent:#FFFFFF;
     --neon:#00B9CE;
     --gold:#A87C1F;
@@ -21,20 +26,24 @@
     --tint-blue:#E5ECF9;   --icon-blue:#3D5FB8;
     --tint-amber:#FBEFDC;  --icon-amber:#A56A12;
     --tint-red:#F9E7E4;    --icon-red:#B14A38;
-    --shadow:0 1px 2px rgba(21,36,48,.05),0 8px 24px -12px rgba(21,36,48,.12);
-    --glow:0 0 0 1px var(--neon),0 6px 28px -4px rgba(0,185,206,.4);
+    --shadow:0 1px 2px rgba(31,42,51,.05),0 8px 24px -12px rgba(31,42,51,.12);
+    --glow:0 0 0 1px var(--neon),0 6px 28px -4px rgba(0,185,206,.35);
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --paper:#0D1418;
-      --card:#142026;
-      --ink:#E6EEF1;
-      --muted:#8FA3AD;
-      --line:#22333B;
-      --accent:#19C2D3;
-      --accent-deep:#6FE3EF;
-      --accent-soft:#0E2A30;
-      --on-accent:#062A2F;
+      --paper:#0E171D;
+      --card:#15222A;
+      --ink:#E7EEF2;
+      --muted:#94A5AF;
+      --line:#243640;
+      --blue:#5FB2E6;
+      --blue-soft:#18303C;
+      --green:#4FBE72;
+      --mint:#13271F;
+      --lime:#B7E43A;
+      --on-lime:#1C2A00;
+      --accent:#4FBE72;
+      --on-accent:#0A2413;
       --neon:#2AE5F5;
       --gold:#DCB456;
       --gold-soft:#2A2416;
@@ -42,19 +51,23 @@
       --tint-amber:#2C2313;  --icon-amber:#E4B061;
       --tint-red:#301B17;    --icon-red:#EE9280;
       --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);
-      --glow:0 0 0 1px var(--neon),0 6px 30px -4px rgba(42,229,245,.35);
+      --glow:0 0 0 1px var(--neon),0 6px 30px -4px rgba(42,229,245,.3);
     }
   }
   :root[data-theme="dark"]{
-    --paper:#0D1418;
-    --card:#142026;
-    --ink:#E6EEF1;
-    --muted:#8FA3AD;
-    --line:#22333B;
-    --accent:#19C2D3;
-    --accent-deep:#6FE3EF;
-    --accent-soft:#0E2A30;
-    --on-accent:#062A2F;
+    --paper:#0E171D;
+    --card:#15222A;
+    --ink:#E7EEF2;
+    --muted:#94A5AF;
+    --line:#243640;
+    --blue:#5FB2E6;
+    --blue-soft:#18303C;
+    --green:#4FBE72;
+    --mint:#13271F;
+    --lime:#B7E43A;
+    --on-lime:#1C2A00;
+    --accent:#4FBE72;
+    --on-accent:#0A2413;
     --neon:#2AE5F5;
     --gold:#DCB456;
     --gold-soft:#2A2416;
@@ -62,7 +75,7 @@
     --tint-amber:#2C2313;  --icon-amber:#E4B061;
     --tint-red:#301B17;    --icon-red:#EE9280;
     --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);
-    --glow:0 0 0 1px var(--neon),0 6px 30px -4px rgba(42,229,245,.35);
+    --glow:0 0 0 1px var(--neon),0 6px 30px -4px rgba(42,229,245,.3);
   }
 
   *{box-sizing:border-box}
@@ -78,93 +91,134 @@
     font:400 16px/1.6 "Avenir Next","Avenir","Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif;
     -webkit-font-smoothing:antialiased;
   }
-  .wrap{max-width:800px;margin:0 auto;padding:0 20px 80px}
-  a{color:var(--accent-deep)}
+  a{color:var(--blue)}
   :focus-visible{outline:2px solid var(--neon);outline-offset:2px;border-radius:4px}
 
-  /* ---------- top bar / theme toggle ---------- */
-  .topbar{display:flex;align-items:center;justify-content:space-between;padding-top:28px}
-  .goat{
-    width:52px;height:52px;border-radius:15px;
-    background:var(--accent-soft);
-    display:flex;align-items:center;justify-content:center;
-    font-size:28px;
-  }
-  .theme-toggle{
-    display:inline-flex;align-items:center;gap:7px;
-    background:var(--card);border:1px solid var(--line);border-radius:99px;
-    padding:7px 14px;cursor:pointer;color:var(--ink);
-    font:600 13px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
-    transition:border-color .2s, box-shadow .2s;
-  }
-  .theme-toggle:hover{border-color:var(--neon);box-shadow:var(--glow)}
+  /* ---------- gradient band ---------- */
+  .band{height:104px;background:var(--grad)}
+  @media (max-width:640px){.band{height:72px}}
 
-  /* ---------- hero ---------- */
-  .hero{padding:26px 0 8px;text-align:left}
-  .eyebrow{
-    font:600 12px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
-    letter-spacing:.14em;text-transform:uppercase;color:var(--accent-deep);
-    margin:0 0 10px;
+  .wrap{max-width:1060px;margin:0 auto;padding:0 22px 80px}
+
+  /* ---------- app bar ---------- */
+  .appbar{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding-top:34px;flex-wrap:wrap}
+  .brand{display:flex;gap:18px;align-items:flex-start}
+  .app-icon{
+    width:64px;height:64px;border-radius:16px;flex-shrink:0;
+    background:linear-gradient(135deg,#0F6E62,#1E86C8);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:var(--shadow);
   }
   h1{
-    font:800 clamp(30px,5.5vw,42px)/1.12 "Avenir Next","Avenir","Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;
-    letter-spacing:-.015em;margin:0 0 14px;text-wrap:balance;
+    font:800 clamp(28px,4.6vw,42px)/1.05 "Avenir Next","Avenir","Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;
+    letter-spacing:-.01em;text-transform:uppercase;color:var(--blue);
+    margin:0 0 6px;text-wrap:balance;max-width:12ch;
   }
-  .lede{font-size:18px;color:var(--muted);max-width:58ch;margin:0 0 10px}
-  .note{
-    font:italic 400 17px/1.55 Georgia,"Times New Roman",serif;
-    color:var(--ink);border-left:3px solid var(--gold);
-    padding:2px 0 2px 16px;margin:22px 0 0;max-width:56ch;
+  .subtitle{margin:0;color:var(--muted);font-size:16px}
+  .controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .pill-edition{
+    font:700 11px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
+    letter-spacing:.12em;text-transform:uppercase;
+    color:var(--blue);background:var(--blue-soft);
+    border-radius:99px;padding:9px 15px;white-space:nowrap;
   }
-  .note small{
-    display:block;margin-top:6px;
-    font:600 11px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
-    font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  .icon-btn{
+    width:40px;height:40px;border-radius:50%;
+    background:var(--card);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;color:var(--ink);font-size:16px;line-height:1;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .icon-btn:hover{border-color:var(--neon);box-shadow:var(--glow)}
+  .pill-progress{
+    font:800 14px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
+    font-variant-numeric:tabular-nums;
+    color:var(--on-lime);background:var(--lime);
+    border-radius:99px;padding:11px 16px;white-space:nowrap;
   }
 
-  /* ---------- progress ---------- */
-  .progress-card{
-    margin:30px 0 8px;background:var(--card);border:1px solid var(--line);
-    border-radius:14px;padding:16px 18px;box-shadow:var(--shadow);
+  /* ---------- tabs ---------- */
+  .tabs{display:flex;gap:28px;border-bottom:1px solid var(--line);margin-top:30px;overflow-x:auto}
+  .tab{
+    background:none;border:0;cursor:pointer;padding:12px 2px;white-space:nowrap;
+    font:700 13px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
+    letter-spacing:.07em;text-transform:uppercase;color:var(--muted);
+    border-bottom:3px solid transparent;margin-bottom:-1px;
   }
-  .progress-row{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  .progress-label{font-weight:600;font-size:14px}
-  .progress-count{
-    font:500 13px/1 ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
-    font-variant-numeric:tabular-nums;color:var(--muted);
-  }
-  .bar{height:8px;background:var(--line);border-radius:99px;margin-top:12px;overflow:hidden}
-  .bar-fill{height:100%;width:0%;background:var(--accent);border-radius:99px;transition:width .4s ease}
-  .done-banner{
-    display:none;margin-top:12px;padding:12px 14px;border-radius:10px;
-    background:var(--gold-soft);color:var(--gold);font-weight:600;font-size:15px;
-  }
-  .done-banner.show{display:block}
+  .tab:hover{color:var(--blue)}
+  .tab.active{color:var(--blue);border-color:var(--blue)}
 
-  /* ---------- jump nav ---------- */
-  .jump{display:flex;gap:10px;margin:22px 0 8px;flex-wrap:wrap}
-  .jump a{
-    text-decoration:none;font-weight:600;font-size:14px;color:var(--ink);
-    background:var(--card);border:1px solid var(--line);border-radius:99px;
-    padding:8px 16px;transition:border-color .2s, box-shadow .2s;
-  }
-  .jump a:hover{border-color:var(--neon);box-shadow:var(--glow);color:var(--accent-deep)}
+  /* ---------- layout ---------- */
+  .layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:30px;margin-top:30px}
+  @media (max-width:940px){.layout{grid-template-columns:1fr}}
+  .side{display:flex;flex-direction:column;gap:16px;align-self:start;position:sticky;top:20px}
+  @media (max-width:940px){.side{position:static}}
+  .panel[hidden]{display:none}
 
-  /* ---------- sections ---------- */
-  section{margin-top:48px}
-  .sec-kicker{
-    font:500 12px/1 ui-monospace,"SF Mono","Cascadia Mono",Menlo,Consolas,monospace;
-    letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep);margin:0 0 8px;
+  .eyebrow{
+    font:700 12px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
+    letter-spacing:.13em;text-transform:uppercase;color:var(--blue);
+    margin:0 0 8px;
   }
   h2{
-    font:800 clamp(22px,3.6vw,28px)/1.2 "Avenir Next","Avenir","Segoe UI",system-ui,sans-serif;
+    font:800 clamp(21px,3.4vw,26px)/1.2 "Avenir Next","Avenir","Segoe UI",system-ui,sans-serif;
     letter-spacing:-.01em;margin:0 0 8px;text-wrap:balance;
   }
-  .sec-intro{color:var(--muted);max-width:60ch;margin:0 0 26px}
+  .sec-intro{font-style:italic;color:var(--muted);max-width:60ch;margin:0 0 26px}
+
+  /* ---------- welcome card ---------- */
+  .felix{
+    background:var(--mint);border-radius:16px;padding:24px;
+    display:flex;gap:20px;align-items:center;margin:0 0 30px;
+  }
+  .felix-photo{
+    width:86px;height:86px;border-radius:50%;flex-shrink:0;
+    background:var(--card);border:3px solid #1E86C8;
+    display:flex;align-items:center;justify-content:center;font-size:42px;
+  }
+  .felix h3{
+    font:800 22px/1.2 "Avenir Next","Avenir","Segoe UI",system-ui,sans-serif;
+    margin:0 0 8px;letter-spacing:-.01em;
+  }
+  .felix .quote{font-style:italic;color:var(--muted);margin:0 0 10px;max-width:52ch}
+  .felix .attr{
+    font:700 12px/1.4 "Avenir Next","Segoe UI",system-ui,sans-serif;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin:0;
+  }
+  @media (max-width:560px){.felix{flex-direction:column;align-items:flex-start}}
+
+  /* ---------- side cards ---------- */
+  .side-card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:18px 20px;box-shadow:var(--shadow);
+  }
+  .side-card h3{font:700 16px/1.3 "Avenir Next","Segoe UI",system-ui,sans-serif;margin:0 0 10px}
+  .next-title{font:700 17px/1.35 "Avenir Next","Segoe UI",system-ui,sans-serif;margin:0 0 4px}
+  .next-meta{font-size:13.5px;color:var(--muted);margin:0 0 12px}
+  .resume{
+    background:none;border:0;padding:0;cursor:pointer;
+    font:800 13px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--blue);
+  }
+  .resume:hover{text-decoration:underline}
+  .big-pct{
+    font:800 42px/1 "Avenir Next","Avenir","Segoe UI",system-ui,sans-serif;
+    font-variant-numeric:tabular-nums;letter-spacing:-.02em;margin:2px 0 8px;
+  }
+  .bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+  .bar-fill{height:100%;width:0%;background:var(--grad);border-radius:99px;transition:width .4s ease}
+  .progress-sub{font-size:13px;color:var(--muted);margin:10px 0 0}
+  .progress-sub b{font-weight:600;color:var(--ink)}
+  .done-banner{
+    display:none;margin-top:12px;padding:12px 14px;border-radius:10px;
+    background:var(--gold-soft);color:var(--gold);font-weight:600;font-size:14px;
+  }
+  .done-banner.show{display:block}
 
   /* ---------- step trail ---------- */
   .trail{list-style:none;margin:0;padding:0}
   .step{display:grid;grid-template-columns:44px 1fr;gap:0 16px;position:relative}
+  @media (max-width:560px){.step{grid-template-columns:36px 1fr;gap:0 12px}}
   .rail{display:flex;flex-direction:column;align-items:center}
   .bubble{
     width:36px;height:36px;border-radius:50%;flex-shrink:0;
@@ -176,8 +230,8 @@
   }
   .connector{width:2px;flex:1;background:var(--line);margin:4px 0;transition:background .3s}
   .step:last-child .connector{display:none}
-  .step.complete .bubble{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-  .step.complete .connector{background:var(--accent)}
+  .step.complete .bubble{background:var(--green);border-color:var(--green);color:var(--on-accent)}
+  .step.complete .connector{background:var(--green)}
 
   .step-card{
     background:var(--card);border:1px solid var(--line);border-radius:14px;
@@ -185,20 +239,21 @@
     transition:border-color .2s, box-shadow .2s;
   }
   .step-card:hover{border-color:var(--neon);box-shadow:var(--glow)}
-  .step.complete .step-card{border-color:color-mix(in srgb, var(--accent) 40%, var(--line))}
+  .step.complete .step-card{border-color:color-mix(in srgb, var(--green) 40%, var(--line))}
   .step-head{
     display:flex;width:100%;align-items:center;gap:12px;text-align:left;
     background:none;border:0;cursor:pointer;padding:16px 18px;color:inherit;font:inherit;
   }
   .step-head .kicker{
-    font:500 11px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace;
-    letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    font:700 11px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--blue);
     display:block;margin-bottom:5px;
   }
   .step-head h3{
     font:700 18px/1.3 "Avenir Next","Avenir","Segoe UI",system-ui,sans-serif;
     margin:0;letter-spacing:-.005em;
   }
+  .step-head .tease{display:block;font-style:italic;font-size:14px;color:var(--muted);margin-top:3px}
   .step-head .head-text{flex:1}
   .chev{flex-shrink:0;width:24px;height:24px;color:var(--muted);transition:transform .25s ease}
   .step-head[aria-expanded="true"] .chev{transform:rotate(180deg)}
@@ -211,7 +266,7 @@
     display:flex;gap:12px;align-items:flex-start;cursor:pointer;
     padding:8px 10px;border-radius:8px;border:1px solid transparent;
   }
-  .tasks label:hover{background:var(--accent-soft)}
+  .tasks label:hover{background:var(--blue-soft)}
   .tasks label.important{
     border-color:color-mix(in srgb, var(--gold) 45%, transparent);
     background:color-mix(in srgb, var(--gold-soft) 55%, transparent);
@@ -229,7 +284,7 @@
     display:inline-flex;align-items:center;justify-content:center;
     transition:background .15s,border-color .15s;
   }
-  .tasks input:checked{background:var(--accent);border-color:var(--accent)}
+  .tasks input:checked{background:var(--green);border-color:var(--green)}
   .tasks input:checked::after{
     content:"";width:10px;height:6px;margin-top:-2px;
     border:2px solid var(--on-accent);border-top:0;border-right:0;transform:rotate(-45deg);
@@ -241,8 +296,8 @@
   .chip{
     display:inline-flex;align-items:center;gap:6px;
     font-size:13.5px;font-weight:600;text-decoration:none;
-    color:var(--accent-deep);background:var(--accent-soft);
-    border:1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    color:var(--blue);background:var(--blue-soft);
+    border:1px solid color-mix(in srgb, var(--blue) 25%, transparent);
     border-radius:99px;padding:7px 14px;
     transition:border-color .2s, box-shadow .2s;
   }
@@ -251,7 +306,7 @@
 
   /* ---------- SSM team strip ---------- */
   .team-label{
-    font:600 11px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
+    font:700 11px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
     letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;
   }
   .team{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
@@ -264,17 +319,13 @@
   .member:hover{border-color:var(--neon);box-shadow:var(--glow)}
   .member .avatar{
     width:28px;height:28px;border-radius:50%;flex-shrink:0;
-    background:var(--accent-soft);color:var(--accent-deep);
+    background:var(--mint);color:var(--green);
     display:flex;align-items:center;justify-content:center;
     font:700 12px/1 "Avenir Next","Segoe UI",system-ui,sans-serif;
   }
   .member .role{font-weight:400;color:var(--muted)}
 
   /* ---------- space map: flip cards ---------- */
-  .explored-count{
-    font:500 13px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace;
-    font-variant-numeric:tabular-nums;color:var(--muted);
-  }
   .group{margin-bottom:34px}
   .group-head{display:flex;align-items:center;gap:10px;margin:0 0 14px}
   .group-head h3{
@@ -309,8 +360,8 @@
   .tap-hint{font-size:12px;color:var(--muted)}
   .visited-dot{
     display:none;position:absolute;top:10px;right:10px;
-    font-size:11px;font-weight:700;color:var(--accent-deep);
-    background:var(--accent-soft);border-radius:99px;padding:3px 9px;
+    font-size:11px;font-weight:700;color:var(--green);
+    background:var(--mint);border-radius:99px;padding:3px 9px;
   }
   .flip.visited .visited-dot{display:inline-block}
   .back-title{display:flex;align-items:center;gap:8px;margin-bottom:2px}
@@ -319,13 +370,17 @@
   .face.back .what{font-size:13.5px;line-height:1.5;color:var(--ink);margin:0}
   .face.back .when{font-size:12.5px;line-height:1.45;color:var(--muted);margin:0}
   .when b{font-weight:600;color:var(--muted)}
-  .open-link{margin-top:auto;font-size:13px;font-weight:600;text-decoration:none;color:var(--accent-deep)}
+  .open-link{margin-top:auto;font-size:13px;font-weight:600;text-decoration:none;color:var(--blue)}
   .open-link:hover{text-decoration:underline}
+  .explored-count{
+    font:500 13px/1 ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    font-variant-numeric:tabular-nums;color:var(--muted);
+  }
 
   /* ---------- help strip / footer ---------- */
   .help-strip{
-    margin-top:52px;background:var(--card);border:1px solid var(--line);
-    border-radius:14px;padding:20px 22px;box-shadow:var(--shadow);
+    margin-top:44px;background:var(--card);border:1px solid var(--line);
+    border-radius:16px;padding:20px 22px;box-shadow:var(--shadow);
     display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap;
   }
   .help-strip .emoji{font-size:26px;line-height:1.3}
@@ -351,58 +406,81 @@
 </head>
 <body>
 <canvas id="confetti"></canvas>
+<div class="band" aria-hidden="true"></div>
 <div class="wrap">
 
-  <div class="topbar">
-    <div class="goat" aria-hidden="true">🐐</div>
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch color theme">
-      <span id="themeIcon" aria-hidden="true">◐</span><span id="themeLabel">Auto</span>
-    </button>
-  </div>
-
-  <header class="hero">
-    <p class="eyebrow">GOAT Academy · New Member Onboarding</p>
-    <h1>Welcome — here's how to start.</h1>
-    <p class="lede">Eight short steps take you from brand-new to trading the FastTrack Roadmap: get set up, learn the guarantee rules, meet your Success Manager, watch the modules, get assessed and start the roadmap. Below that, a map of every space so you always know where to find things.</p>
-    <p class="note">Work through the steps in order — each one unlocks the next. Most members finish Steps 1–5 in their first two weeks.
-      <small>— Felix &amp; the coaching team</small>
-    </p>
-
-    <div class="progress-card">
-      <div class="progress-row">
-        <span class="progress-label">Your onboarding progress</span>
-        <span class="progress-count" id="progressCount">0 of 0 tasks done</span>
+  <header class="appbar">
+    <div class="brand">
+      <div class="app-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6h10M10 12h10M10 18h10"/><path d="M3.5 5.5l1.2 1.2L7 4.4M3.5 11.5l1.2 1.2L7 10.4M3.5 17.5l1.2 1.2L7 16.4"/></svg>
       </div>
-      <div class="bar"><div class="bar-fill" id="barFill"></div></div>
-      <div class="done-banner" id="doneBanner">🏆 That's your onboarding complete — you're officially up and running. See you in class!</div>
+      <div>
+        <h1>New Member Onboarding</h1>
+        <p class="subtitle">Welcome to the GOAT Academy</p>
+      </div>
     </div>
-
-    <nav class="jump" aria-label="Sections">
-      <a href="#path">1 · Your first steps</a>
-      <a href="#map">2 · Know your way around</a>
-    </nav>
+    <div class="controls">
+      <span class="pill-edition">2026 Edition</span>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch color theme" title="Theme: Auto"><span id="themeIcon" aria-hidden="true">◐</span></button>
+      <span class="pill-progress" id="progressPill" title="Your onboarding progress">0%</span>
+    </div>
   </header>
 
-  <section id="path" aria-labelledby="path-h">
-    <p class="sec-kicker">Part 1 of 2</p>
-    <h2 id="path-h">Your first steps</h2>
-    <p class="sec-intro">Do these in order. Tick tasks off as you go — your progress is saved on this device, so you can come back any time.</p>
-    <ol class="trail" id="trail"></ol>
-  </section>
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button class="tab active" id="tab-steps" role="tab" aria-selected="true" aria-controls="panel-steps" type="button">Your First Steps</button>
+    <button class="tab" id="tab-map" role="tab" aria-selected="false" aria-controls="panel-map" type="button">Know Your Way Around</button>
+  </nav>
 
-  <section id="map" aria-labelledby="map-h">
-    <p class="sec-kicker">Part 2 of 2</p>
-    <h2 id="map-h">Know your way around</h2>
-    <p class="sec-intro">The spaces you'll use beyond your first steps — coaching, community and Felix's resources. Tap a card to see what it's for, then open it. Opened spaces get marked as explored. <span class="explored-count" id="exploredCount"></span></p>
-    <div id="spaceMap"></div>
-  </section>
+  <div class="layout">
+    <main>
+      <section class="panel" id="panel-steps" role="tabpanel" aria-labelledby="tab-steps">
+        <div class="felix">
+          <div class="felix-photo" aria-hidden="true">🐐</div>
+          <div>
+            <p class="eyebrow">Welcome</p>
+            <h3>From Felix &amp; the team</h3>
+            <p class="quote">“You made it. Before the roadmap comes a handful of short steps — get set up, learn the rules, meet your team. Then we build.”</p>
+            <p class="attr">· Felix, Founder of GOAT Academy</p>
+          </div>
+        </div>
 
-  <div class="help-strip">
-    <span class="emoji" aria-hidden="true">🙋</span>
-    <div class="txt">
-      <h3>Stuck on anything?</h3>
-      <p>Your Student Success Manager is your first port of call for anything about access or finding your way around. For trading questions, post in <a href="https://friends.goatacademy.org/spaces/22577709" target="_blank" rel="noopener">Ask a Coach</a> — or get an instant answer any hour from <a href="https://friends.goatacademy.org/spaces/24418740" target="_blank" rel="noopener">Your AI Assistant</a>.</p>
-    </div>
+        <p class="eyebrow">Start here</p>
+        <h2>Your first steps</h2>
+        <p class="sec-intro">Do these in order — each one unlocks the next. Tick tasks off as you go; your progress is saved on this device, so you can come back any time.</p>
+        <ol class="trail" id="trail"></ol>
+      </section>
+
+      <section class="panel" id="panel-map" role="tabpanel" aria-labelledby="tab-map" hidden>
+        <p class="eyebrow">Orientation</p>
+        <h2>Know your way around</h2>
+        <p class="sec-intro">The spaces you'll use beyond your first steps — coaching, community and Felix's resources. Tap a card to see what it's for, then open it. Opened spaces get marked as explored. <span class="explored-count" id="exploredCount"></span></p>
+        <div id="spaceMap"></div>
+      </section>
+
+      <div class="help-strip">
+        <span class="emoji" aria-hidden="true">🙋</span>
+        <div class="txt">
+          <h3>Stuck on anything?</h3>
+          <p>Your Student Success Manager is your first port of call for anything about access or finding your way around. For trading questions, post in <a href="https://friends.goatacademy.org/spaces/22577709" target="_blank" rel="noopener">Ask a Coach</a> — or get an instant answer any hour from <a href="https://friends.goatacademy.org/spaces/24418740" target="_blank" rel="noopener">Your AI Assistant</a>.</p>
+        </div>
+      </div>
+    </main>
+
+    <aside class="side">
+      <div class="side-card">
+        <p class="eyebrow">Step</p>
+        <p class="next-title" id="nextTitle">—</p>
+        <p class="next-meta" id="nextMeta"></p>
+        <button class="resume" id="resumeBtn" type="button">Resume →</button>
+      </div>
+      <div class="side-card">
+        <h3>Your progress</h3>
+        <p class="big-pct" id="bigPct">0%</p>
+        <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+        <p class="progress-sub" id="progressSub"></p>
+        <div class="done-banner" id="doneBanner">🏆 That's your onboarding complete — you're officially up and running. See you in class!</div>
+      </div>
+    </aside>
   </div>
 
   <footer>
@@ -454,6 +532,7 @@
   var STEPS = [
     {
       n:1, time:"~10 min", title:"Set yourself up",
+      tease:"Profile, notifications, and your first hello.",
       why:"Everything starts in the Step 1 space: Felix's welcome, your account basics, and your first hello. Two minutes of setup now means you never miss a class later.",
       tasks:[
         {id:"s1-welcome", text:"Watch “Welcome to the GOAT Academy” in Step 1: Welcome & Set Up"},
@@ -465,6 +544,7 @@
     },
     {
       n:2, time:"~15 min", title:"Know the rules: Felix's money-back guarantee",
+      tease:"Watch Felix's video and confirm you know the rules.",
       why:"The academy runs an Action-Based Money-Back Guarantee: follow the process — attend calls, submit weekly reports, apply what you learn — and if the program still doesn't deliver, you get 100% back. Felix explains the exact qualifying actions in one video. Watching it in full is required before you start your program.",
       tasks:[
         {id:"s2-watch",   text:"Watch Felix's money-back guarantee video, in full", important:true},
@@ -474,6 +554,7 @@
     },
     {
       n:3, time:"~30 min", title:"Meet your Success Manager & take the tour",
+      tease:"Your SSM, the team, and the daily welcome call.",
       why:"Every member has a Student Success Manager (SSM) — your personal point of contact for everything around the program: access, finding your way, staying on track. The team also runs a live onboarding Q&A every day, where you get a full tour of the community and answers to all your getting-started questions.",
       extra:teamHtml,
       tasks:[
@@ -487,6 +568,7 @@
     },
     {
       n:4, time:"self-paced", title:"Watch ALL the Academy Modules",
+      tease:"The foundation — required before your assessment.",
       why:"The modules are your foundation — everything in classes and on the roadmap builds on them. Watching all of them is required before your assessment call, so this is the one step you can't skip.",
       tasks:[
         {id:"s2-start", text:"Open Step 2: Academy Modules and start with Module 1"},
@@ -496,6 +578,7 @@
     },
     {
       n:5, time:"~30 min call", title:"Book your assessment call",
+      tease:"A coach finds your starting point on the roadmap.",
       why:"Everyone arrives at a different level, so nobody is forced to start from zero. On this call a coach assesses where you are and tells you exactly where on the FastTrack Roadmap to start — which parts to do, and which you can skip.",
       tasks:[
         {id:"s3-book",  text:"Book your assessment in Step 3: Book an Assessment Call", hint:"Only book once you've finished all the modules."},
@@ -506,6 +589,7 @@
     },
     {
       n:6, time:"ongoing", title:"Start your FastTrack Roadmap",
+      tease:"Your home base for the next six months.",
       why:"The roadmap is the six-month process the whole academy runs on — your home base from here forward. Jump in at the starting point your coach gave you and work stage by stage.",
       tasks:[
         {id:"s4-find", text:"Open Step 3: FastTrack Roadmap and find your starting stage"},
@@ -515,6 +599,7 @@
     },
     {
       n:7, time:"this week", title:"Join your first live class",
+      tease:"Live classes, replays, 1:1 calls and weekly reports.",
       why:"Classes are where the roadmap comes alive. Live group coaching runs on a regular schedule — join from the Live Group Coaching space when it shows the LIVE badge. Can't make it? Every session is recorded.",
       tasks:[
         {id:"s5-live",  text:"Join a live group coaching session", hint:"Open Join Live Group Coaching at class time and click into the session."},
@@ -531,6 +616,7 @@
     },
     {
       n:8, time:"~15 min", title:"Plug into the community",
+      tease:"Wins, questions, news and Felix's resources.",
       why:"You're not doing this alone. Coaches answer questions daily, the AI assistant answers instantly, and Felix drops fresh market notes and tools every week. Members who engage early progress fastest.",
       tasks:[
         {id:"s6-ask",  text:"Ask your first question — in Ask a Coach or Your AI Assistant"},
@@ -591,7 +677,6 @@
   var THEME_META = {auto:["◐","Auto"], light:["☀","Light"], dark:["☾","Dark"]};
   var themeBtn = document.getElementById("themeToggle");
   var themeIcon = document.getElementById("themeIcon");
-  var themeLabel = document.getElementById("themeLabel");
   function currentTheme(){
     try{
       var t = localStorage.getItem("goat-theme");
@@ -607,13 +692,30 @@
       try{ localStorage.setItem("goat-theme", t); }catch(e){}
     }
     themeIcon.textContent = THEME_META[t][0];
-    themeLabel.textContent = THEME_META[t][1];
+    themeBtn.title = "Theme: " + THEME_META[t][1];
+    themeBtn.setAttribute("aria-label", "Switch color theme (current: " + THEME_META[t][1] + ")");
   }
   themeBtn.addEventListener("click", function(){
-    var next = THEMES[(THEMES.indexOf(currentTheme()) + 1) % THEMES.length];
-    applyTheme(next);
+    applyTheme(THEMES[(THEMES.indexOf(currentTheme()) + 1) % THEMES.length]);
   });
   applyTheme(currentTheme());
+
+  /* ---------- tabs ---------- */
+  var tabSteps = document.getElementById("tab-steps");
+  var tabMap = document.getElementById("tab-map");
+  var panelSteps = document.getElementById("panel-steps");
+  var panelMap = document.getElementById("panel-map");
+  function selectTab(which){
+    var stepsActive = which === "steps";
+    tabSteps.classList.toggle("active", stepsActive);
+    tabMap.classList.toggle("active", !stepsActive);
+    tabSteps.setAttribute("aria-selected", stepsActive ? "true" : "false");
+    tabMap.setAttribute("aria-selected", stepsActive ? "false" : "true");
+    panelSteps.hidden = !stepsActive;
+    panelMap.hidden = stepsActive;
+  }
+  tabSteps.addEventListener("click", function(){ selectTab("steps"); });
+  tabMap.addEventListener("click", function(){ selectTab("map"); });
 
   /* ---------- render steps ---------- */
   var trail = document.getElementById("trail");
@@ -640,7 +742,8 @@
       '<div class="step-card">'+
         '<button class="step-head" type="button" aria-expanded="false">'+
           '<span class="head-text"><span class="kicker">Step '+step.n+' · '+step.time+'</span>'+
-          '<h3>'+step.title+'</h3></span>'+CHEV+
+          '<h3>'+step.title+'</h3>'+
+          '<span class="tease">'+step.tease+'</span></span>'+CHEV+
         '</button>'+
         '<div class="step-body">'+
           '<p class="why">'+step.why+'</p>'+
@@ -688,13 +791,22 @@
   GROUPS.forEach(function(g){ totalSpaces += g.spaces.length; });
 
   var barFill = document.getElementById("barFill");
-  var progressCount = document.getElementById("progressCount");
+  var bigPct = document.getElementById("bigPct");
+  var progressPill = document.getElementById("progressPill");
+  var progressSub = document.getElementById("progressSub");
   var doneBanner = document.getElementById("doneBanner");
   var exploredCount = document.getElementById("exploredCount");
+  var nextTitle = document.getElementById("nextTitle");
+  var nextMeta = document.getElementById("nextMeta");
+  var resumeBtn = document.getElementById("resumeBtn");
   var wasComplete = false;
 
   function stepComplete(step){
     return step.tasks.every(function(t){ return !!state.tasks[t.id]; });
+  }
+  function firstIncomplete(){
+    for(var i=0;i<STEPS.length;i++){ if(!stepComplete(STEPS[i])) return STEPS[i]; }
+    return null;
   }
 
   function refresh(){
@@ -708,18 +820,48 @@
     var done = allTaskIds.filter(function(id){ return !!state.tasks[id]; }).length;
     var pct = Math.round(done / allTaskIds.length * 100);
     barFill.style.width = pct + "%";
-    progressCount.textContent = done + " of " + allTaskIds.length + " tasks done";
+    bigPct.textContent = pct + "%";
+    progressPill.textContent = pct + "%";
+    var visited = Object.keys(state.visited).length;
+    progressSub.innerHTML = "<b>" + done + " of " + allTaskIds.length + "</b> tasks done · <b>" +
+      visited + " of " + totalSpaces + "</b> spaces explored";
+    exploredCount.textContent = "Explored " + visited + " of " + totalSpaces + " spaces.";
+
     var complete = done === allTaskIds.length;
     doneBanner.classList.toggle("show", complete);
     if(complete && !wasComplete){ celebrate(); }
     wasComplete = complete;
 
-    var visited = Object.keys(state.visited).length;
-    exploredCount.textContent = "Explored " + visited + " of " + totalSpaces + " spaces.";
+    var next = firstIncomplete();
+    if(next){
+      nextTitle.textContent = next.title;
+      nextMeta.textContent = "Step " + next.n + " of " + STEPS.length + " · " + next.time;
+      resumeBtn.style.display = "";
+    }else{
+      nextTitle.textContent = "All steps complete 🏆";
+      nextMeta.textContent = "You're onboarded — see you in class!";
+      resumeBtn.style.display = "none";
+    }
+
     document.querySelectorAll("[data-space]").forEach(function(card){
       card.classList.toggle("visited", !!state.visited[card.dataset.space]);
     });
   }
+
+  resumeBtn.addEventListener("click", function(){
+    var next = firstIncomplete();
+    if(!next) return;
+    selectTab("steps");
+    STEPS.forEach(function(step){
+      var li = trail.querySelector('[data-step="'+step.n+'"]');
+      var open = step.n === next.n;
+      li.querySelector(".step-body").classList.toggle("open", open);
+      li.querySelector(".step-head").setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    var target = trail.querySelector('[data-step="'+next.n+'"]');
+    target.scrollIntoView({behavior:"smooth", block:"start"});
+    target.querySelector(".step-head").focus({preventScroll:true});
+  });
 
   document.addEventListener("change", function(e){
     var cb = e.target.closest("input[data-task]");
@@ -784,7 +926,7 @@
     var canvas = document.getElementById("confetti");
     var ctx = canvas.getContext("2d");
     canvas.width = innerWidth; canvas.height = innerHeight;
-    var colors = ["#0B7C8C","#2AE5F5","#00B9CE","#DCB456","#A87C1F"];
+    var colors = ["#2E9E4F","#1E86C8","#C7F23F","#12707C","#DCB456"];
     var bits = [];
     for(var i=0;i<120;i++){
       bits.push({
