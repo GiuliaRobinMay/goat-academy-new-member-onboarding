@@ -25,6 +25,7 @@
     --grad:linear-gradient(100deg,#0E5040 0%,#11707C 45%,#2090CF 100%);
     --shadow:0 1px 2px rgba(31,42,51,.05),0 8px 24px -12px rgba(31,42,51,.12);
     --glow:0 0 0 1px var(--neon),0 6px 28px -4px rgba(0,185,206,.35);
+    --glow-soft:0 8px 32px -6px rgba(0,185,206,.5);
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
@@ -46,6 +47,7 @@
       --tint-red:#301B17;    --icon-red:#EE9280;
       --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);
       --glow:0 0 0 1px var(--neon),0 6px 30px -4px rgba(42,229,245,.3);
+      --glow-soft:0 8px 32px -6px rgba(42,229,245,.45);
     }
   }
   :root[data-theme="dark"]{
@@ -67,6 +69,7 @@
     --tint-red:#301B17;    --icon-red:#EE9280;
     --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px -12px rgba(0,0,0,.5);
     --glow:0 0 0 1px var(--neon),0 6px 30px -4px rgba(42,229,245,.3);
+    --glow-soft:0 8px 32px -6px rgba(42,229,245,.45);
   }
 
   *{box-sizing:border-box}
@@ -193,6 +196,9 @@
     transition:border-color .2s, box-shadow .2s;
   }
   .step-card:hover{border-color:var(--neon);box-shadow:var(--glow)}
+  .step.active .step-card{border-color:var(--blue);box-shadow:var(--glow-soft)}
+  .step.active .step-card:hover{border-color:var(--neon)}
+  .step.active .bubble{border-color:var(--blue);color:var(--blue)}
   .step.complete .step-card{border-color:color-mix(in srgb, var(--green) 40%, var(--line))}
   .step-head{
     display:flex;width:100%;align-items:center;gap:12px;text-align:left;
@@ -371,10 +377,7 @@
   <header class="hero">
     <p class="eyebrow">GOAT Academy · New Member Onboarding</p>
     <h1>Welcome — here's how to start.</h1>
-    <p class="lede">Eight short steps take you from brand-new to trading the FastTrack Roadmap: get set up, learn the guarantee rules, meet your Success Manager, watch the modules, get assessed and start the roadmap. Below that, a map of every space so you always know where to find things.</p>
-    <p class="note">Work through the steps in order — each one unlocks the next. Most members finish Steps 1–5 in their first two weeks.
-      <small>— Felix &amp; the coaching team</small>
-    </p>
+    <p class="lede">Eight short steps, done in order — then use the map below to find your way around.</p>
 
     <div class="progress-card">
       <div class="progress-row">
@@ -394,7 +397,7 @@
   <section id="path" aria-labelledby="path-h">
     <p class="sec-kicker">Part 1 of 2</p>
     <h2 id="path-h">Your first steps</h2>
-    <p class="sec-intro">Do these in order. Tick tasks off as you go — your progress is saved on this device, so you can come back any time.</p>
+    <p class="sec-intro">Tick tasks off as you go — your progress is saved on this device.</p>
     <ol class="trail" id="trail"></ol>
   </section>
 
@@ -703,15 +706,37 @@
   function stepComplete(step){
     return step.tasks.every(function(t){ return !!state.tasks[t.id]; });
   }
+  function firstIncomplete(){
+    for(var i=0;i<STEPS.length;i++){ if(!stepComplete(STEPS[i])) return STEPS[i]; }
+    return null;
+  }
+  var activeN = null;
+
+  function openOnly(n){
+    STEPS.forEach(function(step){
+      var li = trail.querySelector('[data-step="'+step.n+'"]');
+      var open = step.n === n;
+      li.querySelector(".step-body").classList.toggle("open", open);
+      li.querySelector(".step-head").setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  }
 
   function refresh(){
     document.querySelectorAll('input[data-task]').forEach(function(cb){
       cb.checked = !!state.tasks[cb.dataset.task];
     });
+    var next = firstIncomplete();
+    var newActive = next ? next.n : null;
     STEPS.forEach(function(step){
       var li = trail.querySelector('[data-step="'+step.n+'"]');
       li.classList.toggle("complete", stepComplete(step));
+      li.classList.toggle("active", step.n === newActive);
     });
+    if(newActive !== activeN){
+      /* the highlighted step moved: collapse the finished one, pop the next open */
+      if(activeN !== null && newActive !== null){ openOnly(newActive); }
+      activeN = newActive;
+    }
     var done = allTaskIds.filter(function(id){ return !!state.tasks[id]; }).length;
     var pct = Math.round(done / allTaskIds.length * 100);
     barFill.style.width = pct + "%";
@@ -816,6 +841,8 @@
   }
 
   wasComplete = allTaskIds.every(function(id){ return !!state.tasks[id]; });
+  var initialNext = firstIncomplete();
+  activeN = initialNext ? initialNext.n : null;
   refresh();
   openInitial();
 })();
