@@ -3,13 +3,17 @@
 A single-file interactive onboarding app for new GOAT Academy members. It combines
 the "best of both worlds" the academy asked for:
 
-1. **Your first steps** — an 8-step checklist trail (set up → money-back
-   guarantee rules → meet your Student Success Manager & community tour →
-   watch all Academy Modules → book an assessment call → start the FastTrack
-   Roadmap → join your first live class → plug into the community). Checkboxes
-   persist per device, with a progress bar and a small celebration at 100%.
-   The guarantee tasks are highlighted as REQUIRED, and the SSM step links to
-   each team member's "Meet …" post plus the daily Live Onboarding Q&A.
+1. **Your first steps** — a 9-step checklist trail (set up → Felix's welcome
+   video → money-back guarantee rules → meet your Student Success Manager &
+   community tour → watch all Academy Modules → book an assessment call →
+   start the FastTrack Roadmap → join your first live class → plug into the
+   community). Checkboxes persist per device, with a progress bar and a small
+   celebration at 100%. The first incomplete step is highlighted and advances
+   as steps complete. The guarantee tasks are highlighted as REQUIRED, the SSM
+   step links each team member's "Meet …" post plus the daily Live Onboarding
+   Q&A, and three of Felix's videos (welcome, money-back guarantee, refer
+   someone) are embedded via Google Drive iframes — the Drive files must stay
+   shared as "anyone with the link can view" for members to see them.
 2. **Know your way around** — a new-member orientation of the spaces beyond
    the Start Here steps (Coaching & Support, Community Channels, Felix's
    Resources) as flip cards: tap a card to reveal what the space is for, when

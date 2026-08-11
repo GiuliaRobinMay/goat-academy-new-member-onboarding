@@ -219,6 +219,12 @@
   .step-body{padding:0 18px 18px;display:none}
   .step-body.open{display:block}
   .why{color:var(--muted);margin:0 0 14px;max-width:58ch}
+  .video-wrap{
+    position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;
+    background:#000;margin:0 0 6px;
+  }
+  .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .video-fallback{font-size:12.5px;color:var(--muted);margin:0 0 14px}
 
   .tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
   .tasks label{
@@ -383,7 +389,7 @@
   <header class="hero">
     <p class="eyebrow">GOAT Academy · New Member Onboarding</p>
     <h1>Welcome — here's how to start.</h1>
-    <p class="lede">Eight short steps, done in order — then use the map below to find your way around.</p>
+    <p class="lede">Nine short steps, done in order — then use the map below to find your way around.</p>
 
     <div class="progress-card">
       <div class="progress-row">
@@ -474,20 +480,30 @@
       why:"Three quick things and you're properly set up — each takes a minute or two.",
       tasks:[
         {id:"s1-profile", text:"Complete your profile",
-         hint:"Add your profile picture, your name and first name, and your time zone and location — for a good orientation in the community.",
+         hint:"Your profile is how coaches and fellow members get to know you. Upload a friendly photo, fill in your first and last name, and set your time zone and location — so everyone knows who they're talking to, and class times always show correctly for you.",
          link:{label:"Open: Profile settings", url:"https://friends.goatacademy.org/your-settings/profile"}},
         {id:"s1-notify",  text:"Adjust your notifications",
-         hint:"Keep yourself informed — leave the daily notifications on so you don't miss a beat.",
+         hint:"Notifications are how the academy reaches you: live class alerts, replies from your coach, important announcements. Take a minute to review your settings and switch the daily notifications on — members who stay in the loop progress faster.",
          link:{label:"Open: Notification settings", url:"https://friends.goatacademy.org/your-settings/notifications"}},
         {id:"s1-app",     text:"Download the app",
-         hint:"Super important: have the community always with you, so you can join live even when you're on the road.",
+         hint:"Your journey doesn't pause when you leave your desk. With the app you can join a live class from anywhere and catch a coach's reply on the go. Install it and log in once — from then on, the academy is one tap away.",
          link:{label:"Open: Download the app", url:"https://friends.goatacademy.org/download-app"}}
       ],
       links:[]
     },
     {
-      n:2, time:"~15 min", title:"Know the rules: Felix's money-back guarantee",
-      why:"The academy runs an Action-Based Money-Back Guarantee: follow the process — attend calls, submit weekly reports, apply what you learn — and if the program still doesn't deliver, you get 100% back. Felix explains the exact qualifying actions in one video. Watching it in full is required before you start your program.",
+      time:"~5 min", title:"Watch Felix's welcome",
+      why:"Before any checklist, hear it from Felix himself: what the GOAT Academy stands for, how your journey here works, and what you can expect from us — and what we expect from you. A few minutes that set the tone for everything that follows.",
+      video:{id:"1j3OA5m0hnEUQJj1W3ywqdJMI9jI86f9M", title:"Welcome to the GOAT Academy — Felix", view:"https://drive.google.com/file/d/1j3OA5m0hnEUQJj1W3ywqdJMI9jI86f9M/view"},
+      tasks:[
+        {id:"s1b-welcome", text:"Watch Felix's welcome video"}
+      ],
+      links:[]
+    },
+    {
+      time:"~15 min", title:"Know the rules: Felix's money-back guarantee",
+      why:"The academy runs an Action-Based Money-Back Guarantee: follow the process — attend calls, submit weekly reports, apply what you learn — and if the program still doesn't deliver, you get 100% back. Felix explains the exact qualifying actions in the video below. Watching it in full is required before you start your program.",
+      video:{id:"1e8TNP7og1B9n4hsFAu3-qA3uaH7aWveu", title:"Felix's money-back guarantee", view:"https://drive.google.com/file/d/1e8TNP7og1B9n4hsFAu3-qA3uaH7aWveu/view"},
       tasks:[
         {id:"s2-watch",   text:"Watch Felix's money-back guarantee video, in full", important:true},
         {id:"s2-confirm", text:"Confirm: I understand the guarantee rules and the actions I need to complete to qualify", important:true, hint:"Attend calls · submit weekly reports · practice with proper risk management · ask when unsure."}
@@ -552,13 +568,15 @@
       ]
     },
     {
-      n:8, time:"~15 min", title:"Plug into the community",
-      why:"You're not doing this alone. Coaches answer questions daily, the AI assistant answers instantly, and Felix drops fresh market notes and tools every week. Members who engage early progress fastest.",
+      time:"~15 min", title:"Plug into the community",
+      why:"You're not doing this alone. Coaches answer questions daily, the AI assistant answers instantly, and Felix drops fresh market notes and tools every week. Members who engage early progress fastest. And when you know someone who'd thrive here too — Felix explains the referral program in the video below.",
+      video:{id:"1O7-cNSTU-XuvWdTDaZhz3Cy4qfOI7xGl", title:"Refer someone — Felix", view:"https://drive.google.com/file/d/1O7-cNSTU-XuvWdTDaZhz3Cy4qfOI7xGl/view"},
       tasks:[
         {id:"s6-ask",  text:"Ask your first question — in Ask a Coach or Your AI Assistant"},
         {id:"s6-felix",text:"Skim Felix's Weekly Market Notes and browse Felix's Tools"},
         {id:"s6-news", text:"Check Academy News & Updates", hint:"Announcements, schedule changes and new releases land here."},
-        {id:"s6-win",  text:"Post your first win in Share Your Wins", hint:"Finished the modules? Had your assessment? That counts."}
+        {id:"s6-win",  text:"Post your first win in Share Your Wins", hint:"Finished the modules? Had your assessment? That counts."},
+        {id:"s6-refer",text:"Know someone who'd love this? Refer them", hint:"Watch Felix's video above — the academy gives you $2,000 for every person you refer who joins."}
       ],
       links:[
         {label:"Ask a Coach", url:SPACE_URL.askcoach},
@@ -640,6 +658,9 @@
   var trail = document.getElementById("trail");
   var CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
+  /* step numbers follow array order, so steps can be inserted without renumbering */
+  STEPS.forEach(function(s,i){ s.n = i + 1; });
+
   STEPS.forEach(function(step){
     var li = document.createElement("li");
     li.className = "step";
@@ -660,6 +681,11 @@
         }).join("")+'</div>'
       : '';
 
+    var videoHtml = step.video
+      ? '<div class="video-wrap"><iframe src="https://drive.google.com/file/d/'+step.video.id+'/preview" title="'+step.video.title+'" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe></div>'+
+        '<p class="video-fallback">Video not loading? <a href="'+step.video.view+'" target="_blank" rel="noopener">Watch it here ↗</a></p>'
+      : '';
+
     li.innerHTML =
       '<div class="rail"><div class="bubble">'+step.n+'</div><div class="connector"></div></div>'+
       '<div class="step-card">'+
@@ -669,6 +695,7 @@
         '</button>'+
         '<div class="step-body">'+
           '<p class="why">'+step.why+'</p>'+
+          videoHtml+
           (step.extra || '')+
           '<ul class="tasks">'+tasksHtml+'</ul>'+
           linksHtml+
