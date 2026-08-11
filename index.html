@@ -389,7 +389,7 @@
   <header class="hero">
     <p class="eyebrow">GOAT Academy · New Member Onboarding</p>
     <h1>Welcome — here's how to start.</h1>
-    <p class="lede">Nine short steps, done in order — then use the map below to find your way around.</p>
+    <p class="lede">Nine short checkpoints, done in order — then use the map below to find your way around.</p>
 
     <div class="progress-card">
       <div class="progress-row">
@@ -401,15 +401,15 @@
     </div>
 
     <nav class="jump" aria-label="Sections">
-      <a href="#path">1 · Your first steps</a>
+      <a href="#path">1 · Onboarding checklist</a>
       <a href="#map">2 · Know your way around</a>
     </nav>
   </header>
 
   <section id="path" aria-labelledby="path-h">
     <p class="sec-kicker">Part 1 of 2</p>
-    <h2 id="path-h">Your first steps</h2>
-    <p class="sec-intro">Tick tasks off as you go — your progress is saved on this device.</p>
+    <h2 id="path-h">Your onboarding checklist</h2>
+    <p class="sec-intro">Work through the checkpoints in order and tick tasks off as you go — your progress is saved on this device.</p>
     <ol class="trail" id="trail"></ol>
   </section>
 
@@ -658,7 +658,11 @@
   var trail = document.getElementById("trail");
   var CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
-  /* step numbers follow array order, so steps can be inserted without renumbering */
+  /* what each card is called in the UI — "Step" is taken by the community's
+     sidebar spaces (Step 1: Welcome & Set Up …), so use a distinct word */
+  var STEP_LABEL = "Checkpoint";
+
+  /* numbers follow array order, so checkpoints can be inserted without renumbering */
   STEPS.forEach(function(s,i){ s.n = i + 1; });
 
   STEPS.forEach(function(step){
@@ -690,7 +694,7 @@
       '<div class="rail"><div class="bubble">'+step.n+'</div><div class="connector"></div></div>'+
       '<div class="step-card">'+
         '<button class="step-head" type="button" aria-expanded="false">'+
-          '<span class="head-text"><span class="kicker">Step '+step.n+' · '+step.time+'</span>'+
+          '<span class="head-text"><span class="kicker">'+STEP_LABEL+' '+step.n+' · '+step.time+'</span>'+
           '<h3>'+step.title+'</h3></span>'+CHEV+
         '</button>'+
         '<div class="step-body">'+

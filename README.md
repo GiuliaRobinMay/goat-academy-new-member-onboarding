@@ -3,7 +3,7 @@
 A single-file interactive onboarding app for new GOAT Academy members. It combines
 the "best of both worlds" the academy asked for:
 
-1. **Your first steps** — a 9-step checklist trail (set up → Felix's welcome
+1. **Onboarding checklist** — a trail of 9 "checkpoints" (set up → Felix's welcome
    video → money-back guarantee rules → meet your Student Success Manager &
    community tour → watch all Academy Modules → book an assessment call →
    start the FastTrack Roadmap → join your first live class → plug into the
@@ -14,6 +14,9 @@ the "best of both worlds" the academy asked for:
    Q&A, and three of Felix's videos (welcome, money-back guarantee, refer
    someone) are embedded via Google Drive iframes — the Drive files must stay
    shared as "anyone with the link can view" for members to see them.
+   The cards are called "Checkpoints" (not "Steps") to avoid clashing with the
+   community's "Step 1/2/3" sidebar spaces — the word is the `STEP_LABEL`
+   constant in the script if you ever want to rename it.
 2. **Know your way around** — a new-member orientation of the spaces beyond
    the Start Here steps (Coaching & Support, Community Channels, Felix's
    Resources) as flip cards: tap a card to reveal what the space is for, when
