@@ -275,26 +275,58 @@
   .chip:hover{border-color:var(--neon);box-shadow:var(--glow)}
   .chip .arrow{font-size:12px}
 
-  /* ---------- SSM team strip ---------- */
+  /* ---------- SSM team cards ---------- */
   .team-label{
     font-weight:700;font-size:11px;line-height:1;
     letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;
   }
-  .team{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
-  .member{
-    display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:inherit;
-    background:var(--card);border:1px solid var(--line);border-radius:99px;
-    padding:5px 13px 5px 5px;font-size:13.5px;font-weight:600;
+  .ssm-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+    gap:12px;margin:0 0 18px;
+  }
+  .ssm-card{
+    display:block;text-align:left;padding:0;cursor:pointer;color:inherit;
+    font:inherit;background:var(--card);border:1px solid var(--line);
+    border-radius:14px;overflow:hidden;box-shadow:var(--shadow);
     transition:border-color .2s, box-shadow .2s;
   }
-  .member:hover{border-color:var(--neon);box-shadow:var(--glow)}
-  .member .avatar{
-    width:28px;height:28px;border-radius:50%;flex-shrink:0;
-    background:var(--green-soft);color:var(--green);
-    display:flex;align-items:center;justify-content:center;
-    font-weight:700;font-size:12px;
+  .ssm-card:hover{border-color:var(--neon);box-shadow:var(--glow)}
+  .ssm-photo{position:relative;display:block;aspect-ratio:4/5;background:var(--green-soft)}
+  .ssm-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .ssm-initial{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-size:44px;font-weight:700;color:var(--green);
   }
-  .member .role{font-weight:400;color:var(--muted)}
+  .ssm-name{display:block;font-weight:700;font-size:15px;padding:10px 12px 2px}
+  .ssm-book{display:block;font-weight:600;font-size:13px;color:var(--blue);padding:0 12px 12px}
+
+  /* ---------- booking modal ---------- */
+  .overlay{
+    position:fixed;inset:0;z-index:60;display:none;
+    align-items:center;justify-content:center;padding:20px;
+    background:rgba(10,18,24,.55);
+  }
+  .overlay.show{display:flex}
+  .modal{
+    background:var(--card);color:var(--ink);border-radius:16px;
+    width:100%;max-width:720px;max-height:88vh;
+    display:flex;flex-direction:column;overflow:hidden;
+    box-shadow:0 24px 64px -12px rgba(0,0,0,.4);
+  }
+  .modal-head{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:14px 18px;border-bottom:1px solid var(--line);
+  }
+  .modal-head h3{margin:0;font-weight:700;font-size:17px}
+  .modal-close{
+    background:none;border:0;cursor:pointer;color:var(--muted);
+    font-size:26px;line-height:1;padding:2px 8px;
+  }
+  .modal-close:hover{color:var(--ink)}
+  .modal-body{flex:1;overflow:auto}
+  .modal-body iframe{display:block;width:100%;height:100%;min-height:540px;border:0}
+  .modal-placeholder{padding:28px;color:var(--muted);font-size:15px}
+  .modal-placeholder strong{color:var(--ink)}
 
   /* ---------- space map: flip cards ---------- */
   .explored-count{
@@ -434,6 +466,16 @@
   </footer>
 </div>
 
+<div class="overlay" id="ssmOverlay" role="dialog" aria-modal="true" aria-labelledby="ssmModalTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="ssmModalTitle">Book a call</h3>
+      <button class="modal-close" id="ssmClose" type="button" aria-label="Close">×</button>
+    </div>
+    <div class="modal-body" id="ssmBody"></div>
+  </div>
+</div>
+
 <script>
 (function(){
   "use strict";
@@ -458,20 +500,26 @@
   };
   var GUARANTEE_URL = "https://friends.goatacademy.org/posts/step-1-welcome-set-up-%E2%9E%BD-must-watch-felixs-money-back-guarantee";
 
+  /* Paste each SSM's Calendly URL into `calendly` (e.g. "https://calendly.com/name/intro-call").
+     Until it's set, the booking window shows a friendly placeholder. */
+  var IMG = "https://media1-production-mightynetworks.imgix.net/asset/";
+  var IMG_PARAMS = "?fm=jpg&q=75&auto=format&w=600&h=750&fit=crop&crop=faces";
   var TEAM = [
-    {name:"Kyla", role:"Head of Student Success", url:"https://friends.goatacademy.org/members/33704015"},
-    {name:"Melissa", url:"https://friends.goatacademy.org/posts/%E2%9E%BD-meet-melissa"},
-    {name:"Hannah", url:"https://friends.goatacademy.org/posts/%E2%9E%BD-meet-hannah"},
-    {name:"Ella", url:"https://friends.goatacademy.org/posts/%E2%9E%BD-meet-ella"},
-    {name:"Angelique", url:"https://friends.goatacademy.org/posts/%E2%9E%BD-meet-angelique"},
-    {name:"Vanda", url:"https://friends.goatacademy.org/posts/%E2%9E%BD-meet-vanda"}
+    {name:"Melissa",   calendly:"", img:IMG+"60e923c7-30fb-4a8d-98dc-92ad07971c44/aaa7f0e7-d6cb-4e24-97b1-a39c68f74f82.png"+IMG_PARAMS},
+    {name:"Hannah",    calendly:"", img:IMG+"ce70ffc5-68a1-4904-afe2-06799e761959/hannah.png"+IMG_PARAMS},
+    {name:"Ella",      calendly:"", img:IMG+"65cde91a-56e9-4dde-91b2-0c1267937972/ella.png"+IMG_PARAMS},
+    {name:"Angelique", calendly:"", img:IMG+"723e7baa-c8e4-4d9f-ac92-f44e0d18e318/angelique.png"+IMG_PARAMS},
+    {name:"Vanda",     calendly:"", img:IMG+"b5f20369-dbfb-4376-9749-060ddbdb43b4/2fa4f0f0-9ced-48d6-b558-dfa5e73787f1.png"+IMG_PARAMS}
   ];
 
-  var teamHtml = '<p class="team-label">Your Student Success Team</p><div class="team">' +
-    TEAM.map(function(m){
-      return '<a class="member" href="'+m.url+'" target="_blank" rel="noopener">'+
-        '<span class="avatar" aria-hidden="true">'+m.name.charAt(0)+'</span>'+m.name+
-        (m.role ? ' <span class="role">· '+m.role+'</span>' : '')+'</a>';
+  var teamHtml = '<p class="team-label">Your Student Success Team — tap a card to book a call</p><div class="ssm-grid">' +
+    TEAM.map(function(m, i){
+      return '<button type="button" class="ssm-card" data-ssm="'+i+'" aria-haspopup="dialog">'+
+        '<span class="ssm-photo"><span class="ssm-initial" aria-hidden="true">'+m.name.charAt(0)+'</span>'+
+        '<img src="'+m.img+'" alt="'+m.name+'" loading="lazy" onerror="this.style.display=\'none\'"></span>'+
+        '<span class="ssm-name">'+m.name+'</span>'+
+        '<span class="ssm-book">Book a call →</span>'+
+      '</button>';
     }).join("") + '</div>';
 
   var STEPS = [
@@ -515,12 +563,10 @@
       why:"Every member has a Student Success Manager (SSM) — your personal point of contact for everything around the program: access, finding your way, staying on track. The team also runs a live onboarding Q&A every day, where you get a full tour of the community and answers to all your getting-started questions.",
       extra:teamHtml,
       tasks:[
-        {id:"s3-ssm",  text:"Find out who your assigned SSM is", hint:"Read the Meet-the-team posts in Step 1: Welcome & Set Up — or just ask in the daily call."},
-        {id:"s3-tour", text:"Get your tour of the community", hint:"Join the daily “Live Onboarding Q&A with a SSM for New Students” (in Join Live Group Coaching, under Events) — or book a call with your SSM and get a personal walkthrough."}
+        {id:"s3-tour", text:"Meet or book a call with your Success Manager", hint:"Tap your SSM's card above to book a call — or join the daily “Live Onboarding Q&A with a SSM for New Students” (in Join Live Group Coaching, under Events) for a live tour of the community."}
       ],
       links:[
-        {label:"Join Live Group Coaching (daily onboarding Q&A)", url:SPACE_URL.liveclass},
-        {label:"Meet the team in Step 1", url:SPACE_URL.step1}
+        {label:"Join Live Group Coaching (daily onboarding Q&A)", url:SPACE_URL.liveclass}
       ]
     },
     {
@@ -536,9 +582,8 @@
       n:5, time:"~30 min call", title:"Book your assessment call",
       why:"Everyone arrives at a different level, so nobody is forced to start from zero. On this call a coach assesses where you are and tells you exactly where on the FastTrack Roadmap to start — which parts to do, and which you can skip.",
       tasks:[
-        {id:"s3-book",  text:"Book your assessment in Step 3: Book an Assessment Call", hint:"Only book once you've finished all the modules."},
-        {id:"s3-attend",text:"Attend the call with your coach"},
-        {id:"s3-note",  text:"Write down your starting point on the roadmap"}
+        {id:"s3-book", text:"Book your assessment call",
+         hint:"Only book once you've finished all the modules. On the call, your coach places you on the roadmap — note down the starting point they give you."}
       ],
       links:[{label:"Open Step 3: Book an Assessment Call", url:SPACE_URL.assessment}]
     },
@@ -546,8 +591,8 @@
       n:6, time:"ongoing", title:"Start your FastTrack Roadmap",
       why:"The roadmap is the six-month process the whole academy runs on — your home base from here forward. Jump in at the starting point your coach gave you and work stage by stage.",
       tasks:[
-        {id:"s4-find", text:"Open Step 3: FastTrack Roadmap and find your starting stage"},
-        {id:"s4-first",text:"Read your current stage and do its first task"}
+        {id:"s4-start", text:"Go to the FastTrack Roadmap and get started",
+         hint:"Jump in at the starting point from your assessment and work stage by stage — this is where you'll spend most of your time from now on."}
       ],
       links:[{label:"Open the FastTrack Roadmap", url:SPACE_URL.roadmap}]
     },
@@ -811,7 +856,36 @@
     card.setAttribute("aria-pressed", flipped ? "true" : "false");
   }
 
+  /* ---------- SSM booking modal ---------- */
+  var ssmOverlay = document.getElementById("ssmOverlay");
+  var ssmTitle = document.getElementById("ssmModalTitle");
+  var ssmBody = document.getElementById("ssmBody");
+  var ssmClose = document.getElementById("ssmClose");
+  function openSSM(i){
+    var m = TEAM[i];
+    if(!m) return;
+    ssmTitle.textContent = "Book a call with " + m.name;
+    ssmBody.innerHTML = m.calendly
+      ? '<iframe src="'+m.calendly+'" title="Book a call with '+m.name+'" loading="lazy"></iframe>'
+      : '<div class="modal-placeholder"><p><strong>'+m.name+'’s booking link is coming soon.</strong></p>'+
+        '<p>In the meantime, send '+m.name+' a message in the community — or join the daily '+
+        '“Live Onboarding Q&A with a SSM for New Students” in Join Live Group Coaching.</p></div>';
+    ssmOverlay.classList.add("show");
+    ssmClose.focus();
+  }
+  function closeSSM(){
+    ssmOverlay.classList.remove("show");
+    ssmBody.innerHTML = "";
+  }
+  ssmClose.addEventListener("click", closeSSM);
+  ssmOverlay.addEventListener("click", function(e){ if(e.target === ssmOverlay) closeSSM(); });
+  document.addEventListener("keydown", function(e){
+    if(e.key === "Escape" && ssmOverlay.classList.contains("show")) closeSSM();
+  });
+
   document.addEventListener("click", function(e){
+    var ssm = e.target.closest("[data-ssm]");
+    if(ssm){ openSSM(+ssm.dataset.ssm); return; }
     var head = e.target.closest(".step-head");
     if(head){
       var body = head.parentElement.querySelector(".step-body");

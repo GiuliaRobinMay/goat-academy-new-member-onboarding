@@ -8,12 +8,16 @@ the "best of both worlds" the academy asked for:
    community tour → watch all Academy Modules → book an assessment call →
    start the FastTrack Roadmap → join your first live class → plug into the
    community). Checkboxes persist per device, with a progress bar and a small
-   celebration at 100%. The first incomplete step is highlighted and advances
-   as steps complete. The guarantee tasks are highlighted as REQUIRED, the SSM
-   step links each team member's "Meet …" post plus the daily Live Onboarding
-   Q&A, and three of Felix's videos (welcome, money-back guarantee, refer
-   someone) are embedded via Google Drive iframes — the Drive files must stay
-   shared as "anyone with the link can view" for members to see them.
+   celebration at 100%. The first incomplete checkpoint is highlighted and
+   advances as checkpoints complete. The guarantee tasks are highlighted as
+   REQUIRED. The SSM checkpoint shows a photo card per Student Success Manager
+   (Melissa, Hannah, Ella, Angelique, Vanda — photos hotlinked from their
+   "Meet …" posts, with an initials fallback); tapping a card opens a booking
+   window that embeds that SSM's Calendly — paste each URL into the `calendly`
+   field of the `TEAM` array in `index.html`. Three of Felix's videos
+   (welcome, money-back guarantee, refer someone) are embedded via Google
+   Drive iframes — the Drive files must stay shared as "anyone with the link
+   can view" for members to see them.
    The cards are called "Checkpoints" (not "Steps") to avoid clashing with the
    community's "Step 1/2/3" sidebar spaces — the word is the `STEP_LABEL`
    constant in the script if you ever want to rename it.
