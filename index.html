@@ -250,6 +250,12 @@
   }
   .tasks input:checked + span{color:var(--muted);text-decoration:line-through;text-decoration-color:color-mix(in srgb, var(--muted) 55%, transparent)}
   .tasks .hint{display:block;font-size:13px;color:var(--muted);text-decoration:none}
+  .task-link{
+    display:inline-block;margin:0 0 8px 42px;
+    font-size:13px;font-weight:600;text-decoration:none;color:var(--blue);
+  }
+  .task-link:hover{text-decoration:underline}
+  .task-link .arrow{font-size:11px}
 
   .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
   .chip{
@@ -465,14 +471,19 @@
   var STEPS = [
     {
       n:1, time:"~10 min", title:"Set yourself up",
-      why:"Everything starts in the Step 1 space: Felix's welcome, your account basics, and your first hello. Two minutes of setup now means you never miss a class later.",
+      why:"Three quick things and you're properly set up — each takes a minute or two.",
       tasks:[
-        {id:"s1-welcome", text:"Watch “Welcome to the GOAT Academy” in Step 1: Welcome & Set Up"},
-        {id:"s1-profile", text:"Add your profile photo and name"},
-        {id:"s1-notify",  text:"Turn on notifications", hint:"So you're pinged when class goes live or someone replies to you."},
-        {id:"s1-hello",   text:"Post a short hello to introduce yourself"}
+        {id:"s1-profile", text:"Complete your profile",
+         hint:"Add your profile picture, your name and first name, and your time zone and location — for a good orientation in the community.",
+         link:{label:"Open: Profile settings", url:"https://friends.goatacademy.org/your-settings/profile"}},
+        {id:"s1-notify",  text:"Adjust your notifications",
+         hint:"Keep yourself informed — leave the daily notifications on so you don't miss a beat.",
+         link:{label:"Open: Notification settings", url:"https://friends.goatacademy.org/your-settings/notifications"}},
+        {id:"s1-app",     text:"Download the app",
+         hint:"Super important: have the community always with you, so you can join live even when you're on the road.",
+         link:{label:"Open: Download the app", url:"https://friends.goatacademy.org/download-app"}}
       ],
-      links:[{label:"Open Step 1: Welcome & Set Up", url:SPACE_URL.step1}]
+      links:[]
     },
     {
       n:2, time:"~15 min", title:"Know the rules: Felix's money-back guarantee",
@@ -638,12 +649,16 @@
       return '<li><label'+(t.important ? ' class="important"' : '')+'>'+
         '<input type="checkbox" data-task="'+t.id+'"><span>'+t.text+
         (t.important ? '<span class="req">REQUIRED</span>' : '')+
-        (t.hint ? '<span class="hint">'+t.hint+'</span>' : '')+'</span></label></li>';
+        (t.hint ? '<span class="hint">'+t.hint+'</span>' : '')+'</span></label>'+
+        (t.link ? '<a class="task-link" href="'+t.link.url+'" target="_blank" rel="noopener">'+t.link.label+' <span class="arrow">↗</span></a>' : '')+
+        '</li>';
     }).join("");
 
-    var linksHtml = step.links.map(function(l){
-      return '<a class="chip" href="'+l.url+'" target="_blank" rel="noopener">'+l.label+' <span class="arrow">↗</span></a>';
-    }).join("");
+    var linksHtml = step.links.length
+      ? '<div class="chips">'+step.links.map(function(l){
+          return '<a class="chip" href="'+l.url+'" target="_blank" rel="noopener">'+l.label+' <span class="arrow">↗</span></a>';
+        }).join("")+'</div>'
+      : '';
 
     li.innerHTML =
       '<div class="rail"><div class="bubble">'+step.n+'</div><div class="connector"></div></div>'+
@@ -656,7 +671,7 @@
           '<p class="why">'+step.why+'</p>'+
           (step.extra || '')+
           '<ul class="tasks">'+tasksHtml+'</ul>'+
-          '<div class="chips">'+linksHtml+'</div>'+
+          linksHtml+
         '</div>'+
       '</div>';
     trail.appendChild(li);
