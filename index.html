@@ -151,15 +151,6 @@
   }
   .done-banner.show{display:block}
 
-  /* ---------- jump nav ---------- */
-  .jump{display:flex;gap:10px;margin:22px 0 8px;flex-wrap:wrap}
-  .jump a{
-    text-decoration:none;font-weight:600;font-size:14px;color:var(--ink);
-    background:var(--card);border:1px solid var(--line);border-radius:99px;
-    padding:8px 16px;transition:border-color .2s, box-shadow .2s;
-  }
-  .jump a:hover{border-color:var(--neon);box-shadow:var(--glow);color:var(--blue)}
-
   /* ---------- sections ---------- */
   section{margin-top:48px}
   .sec-kicker{
@@ -328,57 +319,6 @@
   .modal-placeholder{padding:28px;color:var(--muted);font-size:15px}
   .modal-placeholder strong{color:var(--ink)}
 
-  /* ---------- space map: flip cards ---------- */
-  .explored-count{
-    font-size:13px;font-variant-numeric:tabular-nums;color:var(--muted);
-  }
-  .group{margin-bottom:34px}
-  .group-head{display:flex;align-items:center;gap:10px;margin:0 0 14px}
-  .group-head h3{
-    font-weight:700;font-size:13px;line-height:1;
-    letter-spacing:.12em;text-transform:uppercase;margin:0;
-  }
-  .group-head .rule{flex:1;height:1px;background:var(--line)}
-  .space-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px}
-
-  .flip{position:relative;height:220px;perspective:1000px;cursor:pointer;border-radius:14px}
-  .flip-inner{
-    position:relative;width:100%;height:100%;
-    transform-style:preserve-3d;transition:transform .45s ease;
-  }
-  .flip.flipped .flip-inner{transform:rotateY(180deg)}
-  .face{
-    position:absolute;inset:0;
-    -webkit-backface-visibility:hidden;backface-visibility:hidden;
-    background:var(--card);border:1px solid var(--line);border-radius:14px;
-    box-shadow:var(--shadow);padding:16px;
-    display:flex;flex-direction:column;
-    transition:border-color .2s, box-shadow .2s;
-  }
-  .flip:hover .face,.flip:focus-visible .face{border-color:var(--neon);box-shadow:var(--glow)}
-  .face.front{align-items:center;justify-content:center;text-align:center;gap:10px}
-  .face.back{transform:rotateY(180deg);gap:6px}
-  .space-icon{
-    width:46px;height:46px;border-radius:13px;flex-shrink:0;
-    display:flex;align-items:center;justify-content:center;font-size:23px;
-  }
-  .face.front h4{font-weight:700;font-size:15px;line-height:1.3;margin:0;letter-spacing:-.005em}
-  .tap-hint{font-size:12px;color:var(--muted)}
-  .visited-dot{
-    display:none;position:absolute;top:10px;right:10px;
-    font-size:11px;font-weight:700;color:var(--green);
-    background:var(--green-soft);border-radius:99px;padding:3px 9px;
-  }
-  .flip.visited .visited-dot{display:inline-block}
-  .back-title{display:flex;align-items:center;gap:8px;margin-bottom:2px}
-  .back-title .mini{font-size:16px}
-  .back-title h4{font-weight:700;font-size:13.5px;line-height:1.3;margin:0}
-  .face.back .what{font-size:13.5px;line-height:1.5;color:var(--ink);margin:0}
-  .face.back .when{font-size:12.5px;line-height:1.45;color:var(--muted);margin:0}
-  .when b{font-weight:600;color:var(--muted)}
-  .open-link{margin-top:auto;font-size:13px;font-weight:600;text-decoration:none;color:var(--blue)}
-  .open-link:hover{text-decoration:underline}
-
   /* ---------- help strip / footer ---------- */
   .help-strip{
     margin-top:52px;background:var(--card);border:1px solid var(--line);
@@ -421,7 +361,7 @@
   <header class="hero">
     <p class="eyebrow">GOAT Academy · New Member Onboarding</p>
     <h1>Welcome — here's how to start.</h1>
-    <p class="lede">Nine short checkpoints, done in order — then use the map below to find your way around.</p>
+    <p class="lede">Eight short checkpoints — work through them in order and you're fully up and running.</p>
 
     <div class="progress-card">
       <div class="progress-row">
@@ -431,25 +371,12 @@
       <div class="bar"><div class="bar-fill" id="barFill"></div></div>
       <div class="done-banner" id="doneBanner">🏆 That's your onboarding complete — you're officially up and running. See you in class!</div>
     </div>
-
-    <nav class="jump" aria-label="Sections">
-      <a href="#path">1 · Onboarding checklist</a>
-      <a href="#map">2 · Know your way around</a>
-    </nav>
   </header>
 
   <section id="path" aria-labelledby="path-h">
-    <p class="sec-kicker">Part 1 of 2</p>
     <h2 id="path-h">Your onboarding checklist</h2>
     <p class="sec-intro">Work through the checkpoints in order and tick tasks off as you go — your progress is saved on this device.</p>
     <ol class="trail" id="trail"></ol>
-  </section>
-
-  <section id="map" aria-labelledby="map-h">
-    <p class="sec-kicker">Part 2 of 2</p>
-    <h2 id="map-h">Know your way around</h2>
-    <p class="sec-intro">The spaces you'll use beyond your first steps — coaching, community and Felix's resources. Tap a card to see what it's for, then open it. Opened spaces get marked as explored. <span class="explored-count" id="exploredCount"></span></p>
-    <div id="spaceMap"></div>
   </section>
 
   <div class="help-strip">
@@ -597,28 +524,15 @@
       links:[{label:"Open the FastTrack Roadmap", url:SPACE_URL.roadmap}]
     },
     {
-      n:7, time:"this week", title:"Join your first live class",
-      why:"Classes are where the roadmap comes alive. Live group coaching runs on a regular schedule — join from the Live Group Coaching space when it shows the LIVE badge. Can't make it? Every session is recorded.",
-      tasks:[
-        {id:"s5-live",  text:"Join a live group coaching session", hint:"Open Join Live Group Coaching at class time and click into the session."},
-        {id:"s5-replay",text:"Find the Coaching Replays library", hint:"So you know where to catch up on anything you miss."},
-        {id:"s5-11",    text:"If your plan includes 1:1 coaching: book your first call", hint:"Not on a 1:1 plan? Tick this and move on."},
-        {id:"s5-report",text:"Submit your first weekly report", hint:"Your weekly check-in — it keeps you accountable, and it's one of the guarantee actions."}
-      ],
-      links:[
-        {label:"Join Live Group Coaching", url:SPACE_URL.liveclass},
-        {label:"Watch Coaching Replays", url:SPACE_URL.replays},
-        {label:"Book a 1:1 Coaching Call", url:SPACE_URL.book11},
-        {label:"Submit Weekly Report", url:SPACE_URL.weekly}
-      ]
-    },
-    {
       time:"~15 min", title:"Plug into the community",
       why:"You're not doing this alone. Coaches answer questions daily, the AI assistant answers instantly, and Felix drops fresh market notes and tools every week. Members who engage early progress fastest. And when you know someone who'd thrive here too — Felix explains the referral program in the video below.",
       video:{id:"1O7-cNSTU-XuvWdTDaZhz3Cy4qfOI7xGl", title:"Refer someone — Felix", view:"https://drive.google.com/file/d/1O7-cNSTU-XuvWdTDaZhz3Cy4qfOI7xGl/view"},
       tasks:[
+        {id:"s6-tour", text:"Join one of the daily community tour events",
+         hint:"The “Live Onboarding Q&A with a SSM for New Students” runs every day — a live walkthrough of the community, plus answers to all your getting-started questions.",
+         link:{label:"Open: Join Live Group Coaching (Events)", url:SPACE_URL.liveclass}},
         {id:"s6-ask",  text:"Ask your first question — in Ask a Coach or Your AI Assistant"},
-        {id:"s6-felix",text:"Skim Felix's Weekly Market Notes and browse Felix's Tools"},
+        {id:"s6-felix",text:"Explore Felix's Weekly Market Notes and browse Felix's Tools"},
         {id:"s6-news", text:"Check Academy News & Updates", hint:"Announcements, schedule changes and new releases land here."},
         {id:"s6-win",  text:"Post your first win in Share Your Wins", hint:"Finished the modules? Had your assessment? That counts."},
         {id:"s6-refer",text:"Know someone who'd love this? Refer them", hint:"Watch Felix's video above — the academy gives you $2,000 for every person you refer who joins."}
@@ -627,37 +541,9 @@
         {label:"Ask a Coach", url:SPACE_URL.askcoach},
         {label:"Your AI Assistant", url:SPACE_URL.ai},
         {label:"Felix's Weekly Market Notes", url:SPACE_URL.notes},
+        {label:"Felix's Tools", url:SPACE_URL.tools},
+        {label:"Academy News & Updates", url:SPACE_URL.news},
         {label:"Share Your Wins", url:SPACE_URL.wins}
-      ]
-    }
-  ];
-
-  var GROUPS = [
-    {
-      name:"Coaching & Support", tint:"var(--tint-blue)", icon:"var(--icon-blue)",
-      spaces:[
-        {id:"book11", emoji:"🖥️", name:"Book a 1:1 Coaching Call", what:"Book private sessions with a coach.", when:"If your plan includes 1:1 coaching."},
-        {id:"liveclass", emoji:"🔴", name:"Join Live Group Coaching", what:"The live classroom — when class is on, you join from here. The daily onboarding Q&A also lives here.", when:"At class time; look for the LIVE badge."},
-        {id:"replays", emoji:"▶️", name:"Watch Coaching Replays", what:"Recordings of past classes, so you never truly miss one.", when:"Missed a session, or want to rewatch a topic."},
-        {id:"askcoach", emoji:"💬", name:"Ask a Coach", what:"Post any trading or roadmap question — a coach answers.", when:"Whenever you're stuck. No question is too basic."},
-        {id:"weekly", emoji:"✅", name:"Submit Weekly Report", what:"Your weekly check-in — it keeps you accountable, and it's one of the guarantee actions.", when:"At the end of every week."}
-      ]
-    },
-    {
-      name:"Community Channels", tint:"var(--tint-amber)", icon:"var(--icon-amber)",
-      spaces:[
-        {id:"wins", emoji:"🏆", name:"Share Your Wins", what:"Post your wins big and small, and celebrate everyone else's.", when:"Every win. Seriously — post it."},
-        {id:"ai", emoji:"🤖", name:"Your AI Assistant", what:"A chat assistant that answers academy questions instantly.", when:"Quick questions, any hour of the day."},
-        {id:"news", emoji:"📣", name:"Academy News & Updates", what:"Official announcements — schedule changes, new tools, events.", when:"Check in a couple of times a week."},
-        {id:"alumni", emoji:"🎖️", name:"Alumni Network", what:"Connect with members who have completed the journey.", when:"For inspiration, questions and connections."}
-      ]
-    },
-    {
-      name:"Felix's Resources", tint:"var(--tint-red)", icon:"var(--icon-red)",
-      spaces:[
-        {id:"notes", emoji:"📝", name:"Felix's Weekly Market Notes", what:"Felix's read on the market, fresh every week.", when:"Weekly, before you plan your trades."},
-        {id:"tools", emoji:"🛠️", name:"Felix's Tools", what:"The tools and indicators Felix himself uses.", when:"Once you're working the roadmap."},
-        {id:"edge", emoji:"📈", name:"Market Maker's Edge", what:"Felix's advanced material on how market makers move the market.", when:"Later — once your foundations are solid."}
       ]
     }
   ];
@@ -753,45 +639,12 @@
     trail.appendChild(li);
   });
 
-  /* ---------- render space map (flip cards) ---------- */
-  var mapEl = document.getElementById("spaceMap");
-  GROUPS.forEach(function(g){
-    var div = document.createElement("div");
-    div.className = "group";
-    var cards = g.spaces.map(function(s){
-      return '<div class="flip" data-space="'+s.id+'" tabindex="0" role="button" aria-pressed="false" aria-label="'+s.name+' — tap for info">'+
-        '<div class="flip-inner">'+
-          '<div class="face front">'+
-            '<div class="space-icon" style="background:'+g.tint+'" aria-hidden="true">'+s.emoji+'</div>'+
-            '<h4>'+s.name+'</h4>'+
-            '<span class="tap-hint">Tap for info</span>'+
-            '<span class="visited-dot">✓ Explored</span>'+
-          '</div>'+
-          '<div class="face back">'+
-            '<div class="back-title"><span class="mini" aria-hidden="true">'+s.emoji+'</span><h4>'+s.name+'</h4></div>'+
-            '<p class="what">'+s.what+'</p>'+
-            '<p class="when"><b>Use it:</b> '+s.when+'</p>'+
-            '<a class="open-link" href="'+SPACE_URL[s.id]+'" target="_blank" rel="noopener" data-visit="'+s.id+'">Open space →</a>'+
-          '</div>'+
-        '</div>'+
-      '</div>';
-    }).join("");
-    div.innerHTML =
-      '<div class="group-head"><h3 style="color:'+g.icon+'">'+g.name+'</h3><div class="rule"></div></div>'+
-      '<div class="space-grid">'+cards+'</div>';
-    mapEl.appendChild(div);
-  });
-
   /* ---------- behavior ---------- */
   var allTaskIds = [];
   STEPS.forEach(function(s){ s.tasks.forEach(function(t){ allTaskIds.push(t.id); }); });
-  var totalSpaces = 0;
-  GROUPS.forEach(function(g){ totalSpaces += g.spaces.length; });
-
   var barFill = document.getElementById("barFill");
   var progressCount = document.getElementById("progressCount");
   var doneBanner = document.getElementById("doneBanner");
-  var exploredCount = document.getElementById("exploredCount");
   var wasComplete = false;
 
   function stepComplete(step){
@@ -836,12 +689,6 @@
     doneBanner.classList.toggle("show", complete);
     if(complete && !wasComplete){ celebrate(); }
     wasComplete = complete;
-
-    var visited = Object.keys(state.visited).length;
-    exploredCount.textContent = "Explored " + visited + " of " + totalSpaces + " spaces.";
-    document.querySelectorAll("[data-space]").forEach(function(card){
-      card.classList.toggle("visited", !!state.visited[card.dataset.space]);
-    });
   }
 
   document.addEventListener("change", function(e){
@@ -850,11 +697,6 @@
     if(cb.checked){ state.tasks[cb.dataset.task] = true; } else { delete state.tasks[cb.dataset.task]; }
     save(); refresh();
   });
-
-  function toggleFlip(card){
-    var flipped = card.classList.toggle("flipped");
-    card.setAttribute("aria-pressed", flipped ? "true" : "false");
-  }
 
   /* ---------- SSM booking modal ---------- */
   var ssmOverlay = document.getElementById("ssmOverlay");
@@ -893,20 +735,6 @@
       head.setAttribute("aria-expanded", open ? "true" : "false");
       return;
     }
-    var visit = e.target.closest("[data-visit]");
-    if(visit){
-      state.visited[visit.dataset.visit] = true;
-      save(); refresh();
-      return; /* don't flip the card back when opening the space */
-    }
-    var flip = e.target.closest(".flip");
-    if(flip && !e.target.closest("a")){ toggleFlip(flip); }
-  });
-
-  document.addEventListener("keydown", function(e){
-    if(e.key !== "Enter" && e.key !== " ") return;
-    var flip = e.target.closest ? e.target.closest(".flip") : null;
-    if(flip && e.target === flip){ e.preventDefault(); toggleFlip(flip); }
   });
 
   document.getElementById("resetBtn").addEventListener("click", function(){

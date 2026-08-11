@@ -1,37 +1,23 @@
 # GOAT Academy — New Member Onboarding
 
-A single-file interactive onboarding app for new GOAT Academy members. It combines
-the "best of both worlds" the academy asked for:
+A single-file interactive onboarding app for new GOAT Academy members.
 
-1. **Onboarding checklist** — a trail of 9 "checkpoints" (set up → Felix's welcome
-   video → money-back guarantee rules → meet your Student Success Manager &
-   community tour → watch all Academy Modules → book an assessment call →
-   start the FastTrack Roadmap → join your first live class → plug into the
-   community). Checkboxes persist per device, with a progress bar and a small
-   celebration at 100%. The first incomplete checkpoint is highlighted and
-   advances as checkpoints complete. The guarantee tasks are highlighted as
-   REQUIRED. The SSM checkpoint shows a photo card per Student Success Manager
-   (Melissa, Hannah, Ella, Angelique, Vanda — photos hotlinked from their
-   "Meet …" posts, with an initials fallback); tapping a card opens a booking
-   window that embeds that SSM's Calendly — paste each URL into the `calendly`
-   field of the `TEAM` array in `index.html`. Three of Felix's videos
-   (welcome, money-back guarantee, refer someone) are embedded via Google
-   Drive iframes — the Drive files must stay shared as "anyone with the link
-   can view" for members to see them.
-   The cards are called "Checkpoints" (not "Steps") to avoid clashing with the
-   community's "Step 1/2/3" sidebar spaces — the word is the `STEP_LABEL`
-   constant in the script if you ever want to rename it.
-2. **Know your way around** — a new-member orientation of the spaces beyond
-   the Start Here steps (Coaching & Support, Community Channels, Felix's
-   Resources) as flip cards: tap a card to reveal what the space is for, when
-   to use it, and a direct link. Opened spaces get marked "Explored". Cards
-   glow neon teal on hover.
-
-The design follows the GOAT Academy app color scheme (green→teal→blue
-gradient band, blue headings/links, green progress states) with the system
-font stack the apps use. There's a light/dark/auto theme toggle (top right,
-persisted per device), and interactive elements have the neon teal hover
-glow.
+An onboarding checklist of 8 "checkpoints" (set up -> Felix's welcome video ->
+money-back guarantee rules -> meet/book your Student Success Manager -> watch
+all Academy Modules -> book an assessment call -> start the FastTrack Roadmap
+-> plug into the community). Checkboxes persist per device, with a progress
+bar and a small celebration at 100%. The first incomplete checkpoint carries
+a highlighted border and advances as checkpoints complete. The guarantee
+tasks are marked REQUIRED. The SSM checkpoint shows a photo card per Student
+Success Manager (Melissa, Hannah, Ella, Angelique, Vanda — photos hotlinked
+from their "Meet ..." posts, with an initials fallback); tapping a card opens
+a booking window that embeds that SSM's Calendly — paste each URL into the
+`calendly` field of the `TEAM` array in `index.html`. Three of Felix's videos
+(welcome, money-back guarantee, refer someone) are embedded via Google Drive
+iframes — the Drive files must stay shared as "anyone with the link can view".
+The cards are called "Checkpoints" (not "Steps") to avoid clashing with the
+community's "Step 1/2/3" sidebar spaces — the word is the `STEP_LABEL`
+constant in the script if you ever want to rename it.
 
 ## Files
 
