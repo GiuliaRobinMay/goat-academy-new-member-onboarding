@@ -265,6 +265,11 @@
   }
   .chip:hover{border-color:var(--neon);box-shadow:var(--glow)}
   .chip .arrow{font-size:12px}
+  .chip-soon{
+    color:var(--muted);background:transparent;
+    border:1px dashed var(--line);cursor:default;
+  }
+  .chip-soon:hover{border-color:var(--line);box-shadow:none}
 
   /* ---------- SSM team cards ---------- */
   .team-label{
@@ -272,7 +277,7 @@
     letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px;
   }
   .ssm-grid{
-    display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));
+    display:grid;grid-template-columns:repeat(3,1fr);
     gap:12px;margin:0 0 18px;
   }
   .ssm-card{
@@ -282,7 +287,7 @@
     transition:border-color .2s, box-shadow .2s;
   }
   .ssm-card:hover{border-color:var(--neon);box-shadow:var(--glow)}
-  .ssm-photo{position:relative;display:block;aspect-ratio:4/5;background:var(--green-soft)}
+  .ssm-photo{position:relative;display:block;aspect-ratio:1/1;background:var(--green-soft)}
   .ssm-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .ssm-initial{
     position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
@@ -361,7 +366,7 @@
   <header class="hero">
     <p class="eyebrow">GOAT Academy · New Member Onboarding</p>
     <h1>Welcome — here's how to start.</h1>
-    <p class="lede">Eight short checkpoints — work through them in order and you're fully up and running.</p>
+    <p class="lede">Nine short checkpoints — work through them in order and you're fully up and running.</p>
 
     <div class="progress-card">
       <div class="progress-row">
@@ -409,14 +414,14 @@
 
   var SPACE_URL = {
     step1:      "https://friends.goatacademy.org/spaces/22589736",
-    modules:    "https://friends.goatacademy.org/spaces/22577702",
-    assessment: "https://friends.goatacademy.org/spaces/24627759",
-    roadmap:    "https://friends.goatacademy.org/spaces/22721286",
-    book11:     "https://friends.goatacademy.org/spaces/22577729",
+    modules:    "https://friends.goatacademy.org/spaces/22577702/page",
+    assessment: "https://friends.goatacademy.org/spaces/24627759/page",
+    roadmap:    "https://friends.goatacademy.org/spaces/22721286/page",
+    book11:     "https://friends.goatacademy.org/spaces/22577729/page",
     liveclass:  "https://friends.goatacademy.org/spaces/16767656",
     replays:    "https://friends.goatacademy.org/spaces/20557878",
-    askcoach:   "https://friends.goatacademy.org/spaces/22577709",
-    weekly:     "https://friends.goatacademy.org/spaces/23749452",
+    askcoach:   "https://friends.goatacademy.org/spaces/22577709/feed",
+    weekly:     "https://friends.goatacademy.org/spaces/23749452/page",
     wins:       "https://friends.goatacademy.org/spaces/22577718",
     ai:         "https://friends.goatacademy.org/spaces/24418740",
     news:       "https://friends.goatacademy.org/spaces/22592764",
@@ -426,6 +431,8 @@
     edge:       "https://friends.goatacademy.org/spaces/23134268"
   };
   var GUARANTEE_URL = "https://friends.goatacademy.org/posts/step-1-welcome-set-up-%E2%9E%BD-must-watch-felixs-money-back-guarantee";
+  /* TODO: paste the self-assessment URL here — until then its button shows as "coming soon" */
+  var SELF_ASSESSMENT_URL = "";
 
   /* Paste each SSM's Calendly URL into `calendly` (e.g. "https://calendly.com/name/intro-call").
      Until it's set, the booking window shows a friendly placeholder. */
@@ -506,13 +513,16 @@
       links:[{label:"Open Step 2: Academy Modules", url:SPACE_URL.modules}]
     },
     {
-      n:5, time:"~30 min call", title:"Book your assessment call",
-      why:"Everyone arrives at a different level, so nobody is forced to start from zero. On this call a coach assesses where you are and tells you exactly where on the FastTrack Roadmap to start — which parts to do, and which you can skip.",
+      time:"~30 min", title:"Get your level assessed",
+      why:"Everyone arrives at a different level, so nobody is forced to start from zero. The assessment finds out where you are and tells you exactly where on the FastTrack Roadmap to start — which parts to do, and which you can skip. Two equal ways to do it: book an assessment call with a coach, or take the self-assessment at your own pace.",
       tasks:[
-        {id:"s3-book", text:"Book your assessment call",
-         hint:"Only book once you've finished all the modules. On the call, your coach places you on the roadmap — note down the starting point they give you."}
+        {id:"s3-book", text:"Get your level assessed — book a call or assess yourself",
+         hint:"Only do this once you've finished all the modules. Whichever path you choose, note down the starting point it gives you — that's where the roadmap begins for you."}
       ],
-      links:[{label:"Open Step 3: Book an Assessment Call", url:SPACE_URL.assessment}]
+      links:[
+        {label:"Book an assessment call", url:SPACE_URL.assessment},
+        {label:"Take the self-assessment", url:SELF_ASSESSMENT_URL}
+      ]
     },
     {
       n:6, time:"ongoing", title:"Start your FastTrack Roadmap",
@@ -522,6 +532,15 @@
          hint:"Jump in at the starting point from your assessment and work stage by stage — this is where you'll spend most of your time from now on."}
       ],
       links:[{label:"Open the FastTrack Roadmap", url:SPACE_URL.roadmap}]
+    },
+    {
+      time:"weekly", title:"Submit your first weekly report",
+      why:"From the moment you're working the roadmap, the weekly report is your rhythm: a short check-in on your trades, your progress and your questions. It keeps you accountable, gives your coaches exactly what they need to guide you — and it's one of the actions that keeps your money-back guarantee valid.",
+      tasks:[
+        {id:"s7-report", text:"Submit your first weekly report",
+         hint:"It takes about five minutes at the end of your week. From then on, make it a habit: every week, same place."}
+      ],
+      links:[{label:"Open: Submit Weekly Report", url:SPACE_URL.weekly}]
     },
     {
       time:"~15 min", title:"Plug into the community",
@@ -612,7 +631,9 @@
 
     var linksHtml = step.links.length
       ? '<div class="chips">'+step.links.map(function(l){
-          return '<a class="chip" href="'+l.url+'" target="_blank" rel="noopener">'+l.label+' <span class="arrow">↗</span></a>';
+          return l.url
+            ? '<a class="chip" href="'+l.url+'" target="_blank" rel="noopener">'+l.label+' <span class="arrow">↗</span></a>'
+            : '<span class="chip chip-soon">'+l.label+' · coming soon</span>';
         }).join("")+'</div>'
       : '';
 
