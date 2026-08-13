@@ -2,18 +2,17 @@
 
 A single-file interactive onboarding app for new GOAT Academy members.
 
-An onboarding checklist of 10 "checkpoints" (set up -> Felix's welcome video
--> money-back guarantee rules -> meet/book your Student Success Manager ->
-join a live welcome call -> watch all Academy Modules -> book an assessment
-call -> start the FastTrack Roadmap -> submit your first weekly report ->
-plug into the community). Checkboxes persist per device, with a progress
-bar and a small celebration at 100%. The first incomplete checkpoint carries
-a highlighted border and advances as checkpoints complete. The guarantee
-tasks are marked REQUIRED. The SSM checkpoint shows a photo card per Student
-Success Manager (Melissa, Hannah, Ella, Angelique, Vanda — photos hotlinked
-from their "Meet ..." posts, with an initials fallback); tapping a card opens
-a booking window that embeds that SSM's Calendly — paste each URL into the
-`calendly` field of the `TEAM` array in `index.html`. Three of Felix's videos
+An onboarding checklist of 9 "checkpoints" (set up -> Felix's welcome video
+-> money-back guarantee rules -> join a live welcome call -> watch all
+Academy Modules -> book an assessment call -> start the FastTrack Roadmap ->
+submit your first weekly report -> plug into the community). Checkboxes
+persist per device, with a progress bar and a small celebration at 100%. The
+first incomplete checkpoint carries a highlighted border and advances as
+checkpoints complete. The guarantee tasks are marked REQUIRED. There is no
+SSM booking step: since Aug 2026 every new student gets a short intro phone
+call from their Student Success Manager the day after joining, so the
+welcome-call checkpoint mentions that call and links the recurring daily
+"Live Q&A for New Students" event page. Three of Felix's videos
 (welcome, money-back guarantee, refer someone) are embedded via Google Drive
 iframes — the Drive files must stay shared as "anyone with the link can view".
 The cards are called "Checkpoints" (not "Steps") to avoid clashing with the
@@ -56,6 +55,9 @@ so it works fine inside an iframe.
 
 ## Ideas for next iterations (from Giulia's walkthrough for Vlad)
 
+- **SSM intro call**: each new student now gets a 2-3 min phone call from
+  their SSM the day after joining — if that ever becomes bookable again, the
+  removed Calendly-card UI lives in git history (commit 617664f).
 - **Headless API tracking**: use the community's headless API to see whether a
   member has completed their profile, enabled notifications and downloaded the
   app; notify the team when someone *disables* notifications so we can send a
