@@ -2,10 +2,11 @@
 
 A single-file interactive onboarding app for new GOAT Academy members.
 
-An onboarding checklist of 8 "checkpoints" (set up -> Felix's welcome video ->
-money-back guarantee rules -> meet/book your Student Success Manager -> watch
-all Academy Modules -> book an assessment call -> start the FastTrack Roadmap
--> plug into the community). Checkboxes persist per device, with a progress
+An onboarding checklist of 10 "checkpoints" (set up -> Felix's welcome video
+-> money-back guarantee rules -> meet/book your Student Success Manager ->
+join a live welcome call -> watch all Academy Modules -> book an assessment
+call -> start the FastTrack Roadmap -> submit your first weekly report ->
+plug into the community). Checkboxes persist per device, with a progress
 bar and a small celebration at 100%. The first incomplete checkpoint carries
 a highlighted border and advances as checkpoints complete. The guarantee
 tasks are marked REQUIRED. The SSM checkpoint shows a photo card per Student
@@ -52,3 +53,18 @@ Host `index.html` anywhere (GitHub Pages, Netlify, any static host) and embed
 it in a Circle space via an iframe / custom HTML block, or link to it directly
 from the "Step 1: Welcome & Set Up" space. All space links open in a new tab,
 so it works fine inside an iframe.
+
+## Ideas for next iterations (from Giulia's walkthrough for Vlad)
+
+- **Headless API tracking**: use the community's headless API to see whether a
+  member has completed their profile, enabled notifications and downloaded the
+  app; notify the team when someone *disables* notifications so we can send a
+  gentle nudge ("we noticed notifications are off — keeping them on matters
+  for your progress"); follow up on whether the welcome/guarantee videos were
+  watched, the rules confirmed, and the SSM call booked.
+- **Upcoming-events calendar**: embed a small calendar of upcoming welcome
+  calls / classes in the "Join a live welcome call" checkpoint (needs an
+  events feed or a direct events-tab URL).
+- **Self-assessment**: goes live by pasting its URL into
+  `SELF_ASSESSMENT_URL` in `index.html` — the button then appears
+  automatically next to "Book an assessment call".

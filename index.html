@@ -366,7 +366,7 @@
   <header class="hero">
     <p class="eyebrow">GOAT Academy · New Member Onboarding</p>
     <h1>You made it — welcome.</h1>
-    <p class="lede">You're now part of a community of traders, coaches and friends who genuinely want to see you win. Nine short checkpoints and you're fully up and running.</p>
+    <p class="lede">You're now part of a community of traders, coaches and friends who genuinely want to see you win. Ten short checkpoints and you're fully up and running.</p>
 
     <div class="progress-card">
       <div class="progress-row">
@@ -497,11 +497,18 @@
       why:"From day one there's a real person in your corner. Every member has a Student Success Manager (SSM) — your personal point of contact for everything around the program: access, finding your way, staying on track. The team also runs a live onboarding Q&A every day, where you get a full tour of the community and answers to all your getting-started questions.",
       extra:teamHtml,
       tasks:[
-        {id:"s3-tour", text:"Meet or book a call with your Success Manager", hint:"Tap your SSM's card above to book a call — or join the daily “Live Onboarding Q&A with a SSM for New Students” (in Join Live Group Coaching, under Events) for a live tour of the community."}
+        {id:"s3-tour", text:"Meet or book a call with your Success Manager", hint:"Tap your SSM's card above to book a call — they'll help you settle in and answer anything about your program."}
       ],
-      links:[
-        {label:"Join Live Group Coaching (daily onboarding Q&A)", url:SPACE_URL.liveclass}
-      ]
+      links:[]
+    },
+    {
+      time:"~45 min", title:"Join a live welcome call",
+      why:"Every day, the Success team hosts a live onboarding Q&A for new students — a guided tour of the community and answers to whatever week-one questions you bring. Drop into one this week: it's the fastest way to feel at home.",
+      tasks:[
+        {id:"s3b-call", text:"Join one of the daily welcome calls",
+         hint:"Find today's “Live Onboarding Q&A with a SSM for New Students” under Events in Join Live Group Coaching, and RSVP for the time that suits you."}
+      ],
+      links:[{label:"See upcoming welcome calls", url:SPACE_URL.liveclass}]
     },
     {
       time:"self-paced", title:"Watch ALL the Academy Modules",
@@ -546,9 +553,6 @@
       why:"You're not doing this alone. Coaches answer questions daily, the AI assistant answers instantly, Felix drops fresh market notes and tools every week — and some of the most generous traders you'll ever meet are one post away. The members who plug in early are the ones who progress fastest. And when you know someone who'd thrive here too, Felix explains the referral program in the video below.",
       video:{id:"1O7-cNSTU-XuvWdTDaZhz3Cy4qfOI7xGl", title:"Refer someone — Felix", view:"https://drive.google.com/file/d/1O7-cNSTU-XuvWdTDaZhz3Cy4qfOI7xGl/view"},
       tasks:[
-        {id:"s6-tour", text:"Join one of the daily community tour events",
-         hint:"The “Live Onboarding Q&A with a SSM for New Students” runs every day — a live walkthrough of the community, plus answers to all your getting-started questions.",
-         link:{label:"Open: Join Live Group Coaching (Events)", url:SPACE_URL.liveclass}},
         {id:"s6-ask",  text:"Ask your first question — in Ask a Coach or Your AI Assistant"},
         {id:"s6-felix",text:"Explore Felix's Weekly Market Notes and browse Felix's Tools"},
         {id:"s6-news", text:"Check Academy News & Updates", hint:"Announcements, schedule changes and new releases land here."},
