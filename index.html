@@ -16,6 +16,7 @@
     --green:#2E9E4F;
     --green-soft:#E9F2EC;
     --on-green:#FFFFFF;
+    --on-blue:#FFFFFF;
     --neon:#00B9CE;
     --gold:#A87C1F;
     --gold-soft:#F7EFDB;
@@ -39,6 +40,7 @@
       --green:#4FBE72;
       --green-soft:#13271F;
       --on-green:#0A2413;
+      --on-blue:#0B2331;
       --neon:#2AE5F5;
       --gold:#DCB456;
       --gold-soft:#2A2416;
@@ -61,6 +63,7 @@
     --green:#4FBE72;
     --green-soft:#13271F;
     --on-green:#0A2413;
+    --on-blue:#0B2331;
     --neon:#2AE5F5;
     --gold:#DCB456;
     --gold-soft:#2A2416;
@@ -178,8 +181,8 @@
   }
   .connector{width:2px;flex:1;background:var(--line);margin:4px 0;transition:background .3s}
   .step:last-child .connector{display:none}
-  .step.complete .bubble{background:var(--green);border-color:var(--green);color:var(--on-green)}
-  .step.complete .connector{background:var(--green)}
+  .step.complete .bubble{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+  .step.complete .connector{background:var(--blue)}
 
   .step-card{
     background:var(--card);border:1px solid var(--line);border-radius:14px;
@@ -190,7 +193,7 @@
   .step.active .step-card{border-color:var(--blue);box-shadow:var(--glow-soft)}
   .step.active .step-card:hover{border-color:var(--neon)}
   .step.active .bubble{border-color:var(--blue);color:var(--blue)}
-  .step.complete .step-card{border-color:color-mix(in srgb, var(--green) 40%, var(--line))}
+  .step.complete .step-card{border-color:color-mix(in srgb, var(--blue) 40%, var(--line))}
   .step-head{
     display:flex;width:100%;align-items:center;gap:12px;text-align:left;
     background:none;border:0;cursor:pointer;padding:16px 18px;color:inherit;font:inherit;
@@ -315,7 +318,7 @@
   <header class="hero">
     <p class="eyebrow">GOAT Academy · New Member Onboarding</p>
     <h1>You made it. Welcome.</h1>
-    <p class="lede">You're now part of a community of traders, coaches and friends who genuinely want to see you win. Nine short checkpoints and you're fully up and running.</p>
+    <p class="lede">You're now part of a community of traders, coaches and friends who genuinely want to see you win. Ten short checkpoints and you're fully up and running.</p>
 
     <div class="progress-card">
       <div class="progress-row">
@@ -379,7 +382,7 @@
     {
       time:"~10 min", title:"Set yourself up",
       hook:"This is your place now. Make it yours.",
-      why:"Three quick things and you're properly set up. And keep an eye on your phone: <b>your Student Success Manager will personally call you</b> within a day of joining, a quick hello to make sure you know your next steps.",
+      why:"Three quick things and you're properly set up. Each takes a minute or two.",
       tasks:[
         {id:"s1-profile", text:"Complete your profile",
          hint:"Add <b>your photo, your name and your time zone</b>, so coaches and members know who they're talking to and class times show correctly for you.",
@@ -390,6 +393,16 @@
         {id:"s1-app",     text:"Download the app",
          hint:"<b>Take the academy with you.</b> Join a live class or catch a coach's reply from anywhere. Install once, log in once, done.",
          link:{label:"Open: Download the app", url:"https://friends.goatacademy.org/download-app"}}
+      ],
+      links:[]
+    },
+    {
+      time:"~3 min", title:"Expect a call from your Success Manager",
+      hook:"A real person, calling just to welcome you.",
+      why:"Within a day of joining, <b>your Student Success Manager will personally call you</b>: a quick hello to introduce themselves and make sure you know your next steps. <b>Nothing to book, nothing to prepare.</b> Just pick up when they ring.",
+      tasks:[
+        {id:"s1c-ssmcall", text:"Have your welcome call with your Success Manager",
+         hint:"Tick this off once you've spoken. Your SSM stays your personal point of contact for anything around the program."}
       ],
       links:[]
     },

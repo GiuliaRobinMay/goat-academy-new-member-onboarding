@@ -2,10 +2,11 @@
 
 A single-file interactive onboarding app for new GOAT Academy members.
 
-An onboarding checklist of 9 "checkpoints" (set up -> Felix's welcome video
--> money-back guarantee rules -> join a live welcome call -> watch all
-Academy Modules -> book an assessment call -> start the FastTrack Roadmap ->
-submit your first weekly report -> plug into the community). Checkboxes
+An onboarding checklist of 10 "checkpoints" (set up -> your SSM's welcome
+phone call -> Felix's welcome video -> money-back guarantee rules -> join a
+live welcome call -> watch all Academy Modules -> book an assessment call ->
+start the FastTrack Roadmap -> submit your first weekly report -> plug into
+the community). Checkboxes
 persist per device, with a progress bar and a small celebration at 100%. The
 first incomplete checkpoint carries a highlighted border and advances as
 checkpoints complete. The guarantee tasks are marked REQUIRED. There is no
