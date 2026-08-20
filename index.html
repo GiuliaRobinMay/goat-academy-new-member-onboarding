@@ -376,8 +376,6 @@
     edge:       "https://friends.goatacademy.org/spaces/23134268"
   };
   var GUARANTEE_URL = "https://friends.goatacademy.org/posts/step-1-welcome-set-up-%E2%9E%BD-must-watch-felixs-money-back-guarantee";
-  /* TODO: paste the self-assessment URL here — until then its button shows as "coming soon" */
-  var SELF_ASSESSMENT_URL = "";
   /* the events calendar of Join Live Group Coaching (evergreen; single events expire) */
   var WELCOME_EVENT_URL = "https://friends.goatacademy.org/spaces/16767656/events";
 
@@ -443,24 +441,22 @@
     {
       time:"self-paced", title:"Watch ALL the Academy Modules",
       hook:"Every successful member started right here.",
-      why:"The modules are <b>your foundation</b>: everything in classes and on the roadmap builds on them. That's why <b>watching all of them is required</b> before your assessment call.",
+      why:"The modules are <b>your foundation</b>: everything in classes and on the roadmap builds on them. That's why <b>watching all of them is required</b> before your assessment.",
       tasks:[
         {id:"s2-all", text:"Watch ALL the Academy Modules, before anything else",
-         hint:"Start at Module 1 and go in order. <b>Note down questions</b> as you go: perfect material for Ask a Coach and your assessment call."}
+         hint:"Start at Module 1 and go in order. <b>Note down questions</b> as you go: perfect material for Ask a Coach and your assessment."}
       ],
       links:[{label:"Open Step 2: Academy Modules", url:SPACE_URL.modules}]
     },
     {
-      time:"~30 min call", title:"Book your assessment call",
+      time:"~20 min", title:"Take your assessment",
       hook:"Start where you are. Not from zero.",
-      why:"Everyone arrives at a different level. On this call a coach finds out <b>where you already are</b> and shows you <b>exactly where on the roadmap to begin</b>: what to do, and what you've already earned the right to skip.",
+      why:"Everyone arrives at a different level. We've created a test that finds out <b>where you already are</b> and shows you <b>exactly where on the roadmap to begin</b>: what to do, and what you've already earned the right to skip. <b>Take the assessment first</b> — it defines your starting level.",
       tasks:[
-        {id:"s3-book", text:"Book your assessment call",
-         hint:"<b>Book once you've finished all the modules.</b> Note down the starting point your coach gives you."}
+        {id:"s3-test", text:"Do the assessment to define your level",
+         hint:"<b>Take it once you've finished all the modules.</b> Note down the starting level it gives you. If after your assessment you still have questions, you can always book an assessment call to discuss your results."}
       ],
-      /* when the self-assessment goes live, set SELF_ASSESSMENT_URL above and its button appears here automatically */
-      links:[{label:"Book an assessment call", url:SPACE_URL.assessment}].concat(
-        SELF_ASSESSMENT_URL ? [{label:"Take the self-assessment", url:SELF_ASSESSMENT_URL}] : [])
+      links:[{label:"Do the assessment", url:SPACE_URL.assessment}]
     },
     {
       time:"ongoing", title:"Start your FastTrack Roadmap",

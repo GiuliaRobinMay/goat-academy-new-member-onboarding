@@ -4,7 +4,7 @@ A single-file interactive onboarding app for new GOAT Academy members.
 
 An onboarding checklist of 10 "checkpoints" (set up -> your SSM's welcome
 phone call -> Felix's welcome video -> money-back guarantee rules -> join a
-live welcome call -> watch all Academy Modules -> book an assessment call ->
+live welcome call -> watch all Academy Modules -> take the assessment test ->
 start the FastTrack Roadmap -> submit your first weekly report -> plug into
 the community). Checkboxes
 persist per device, with a progress bar and a small celebration at 100%. The
@@ -68,6 +68,6 @@ so it works fine inside an iframe.
 - **Upcoming-events calendar**: embed a small calendar of upcoming welcome
   calls / classes in the "Join a live welcome call" checkpoint (needs an
   events feed or a direct events-tab URL).
-- **Self-assessment**: goes live by pasting its URL into
-  `SELF_ASSESSMENT_URL` in `index.html` — the button then appears
-  automatically next to "Book an assessment call".
+- **Assessment**: the level test is live in the Book an Assessment space;
+  the checkpoint sends members there first, with an assessment call as the
+  follow-up option for discussing results.
