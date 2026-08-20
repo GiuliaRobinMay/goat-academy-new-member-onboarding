@@ -278,6 +278,8 @@
     border:1px dashed var(--line);cursor:default;
   }
   .chip-soon:hover{border-color:var(--line);box-shadow:none}
+  .footnote{font-size:13px;color:var(--muted);margin:12px 0 0;max-width:58ch}
+  .footnote a{color:var(--blue)}
 
   /* ---------- help strip / footer ---------- */
   .help-strip{
@@ -454,9 +456,10 @@
       why:"Everyone arrives at a different level. We've created a test that finds out <b>where you already are</b> and shows you <b>exactly where on the roadmap to begin</b>: what to do, and what you've already earned the right to skip. <b>Take the assessment first</b> — it defines your starting level.",
       tasks:[
         {id:"s3-test", text:"Do the assessment to define your level",
-         hint:"<b>Take it once you've finished all the modules.</b> Note down the starting level it gives you. If after your assessment you still have questions, you can always book an assessment call to discuss your results."}
+         hint:"<b>Take it once you've finished all the modules.</b> Note down the starting level it gives you."}
       ],
-      links:[{label:"Do the assessment", url:SPACE_URL.assessment}]
+      links:[{label:"Do the assessment", url:SPACE_URL.assessment}],
+      footnote:'If something is unclear or you have questions about the results of your assessment, you can <a href="'+SPACE_URL.assessment+'" target="_blank" rel="noopener">book an assessment call</a>.'
     },
     {
       time:"ongoing", title:"Start your FastTrack Roadmap",
@@ -590,6 +593,7 @@
           (step.extra || '')+
           '<ul class="tasks">'+tasksHtml+'</ul>'+
           linksHtml+
+          (step.footnote ? '<p class="footnote">'+step.footnote+'</p>' : '')+
         '</div>'+
       '</div>';
     trail.appendChild(li);
