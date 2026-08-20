@@ -236,6 +236,11 @@
     background:color-mix(in srgb, var(--gold-soft) 55%, transparent);
   }
   .tasks label.important:hover{background:var(--gold-soft)}
+  .opt{
+    display:inline-block;font-weight:700;font-size:10px;line-height:1;
+    letter-spacing:.1em;color:var(--muted);border:1px solid var(--check);
+    border-radius:5px;padding:2px 6px;margin-left:8px;vertical-align:2px;
+  }
   .req{
     display:inline-block;font-weight:700;font-size:10px;line-height:1;
     letter-spacing:.1em;color:var(--gold);border:1px solid var(--gold);
@@ -443,7 +448,7 @@
     {
       time:"self-paced", title:"Watch ALL the Academy Modules",
       hook:"Every successful member started right here.",
-      why:"The modules are <b>your foundation</b>: everything in classes and on the roadmap builds on them. That's why <b>watching all of them is required</b> before the Roadmap Placement Quiz.",
+      why:"The modules are <b>your foundation</b>: everything in classes and on the roadmap builds on them. That's why <b>watching all of them is required</b> before you start the roadmap.",
       tasks:[
         {id:"s2-all", text:"Watch ALL the Academy Modules, before anything else",
          hint:"Start at Module 1 and go in order. <b>Note down questions</b> as you go: perfect material for Ask a Coach and the placement quiz."}
@@ -451,12 +456,12 @@
       links:[{label:"Open Step 2: Academy Modules", url:SPACE_URL.modules}]
     },
     {
-      time:"~20 min", title:"Take the Roadmap Placement Quiz",
+      time:"optional · ~20 min", title:"Take the Roadmap Placement Quiz",
       hook:"Start where you are. Not from zero.",
-      why:"Everyone arrives at a different level. The Roadmap Placement Quiz finds out <b>where you already are</b> and shows you <b>exactly where on the roadmap to begin</b>: what to do, and what you've already earned the right to skip. <b>Take the quiz first</b> — it defines your starting level.",
+      why:"<b>Most members start at Level 1, Month 1</b>, and that's exactly the right place to be. If you're already further along, the Roadmap Placement Quiz shows you <b>where on the roadmap to begin</b> and what you've earned the right to skip. <b>The quiz is completely optional</b>: if you'd rather head straight to Month 1 and start, that's perfectly fine.",
       tasks:[
-        {id:"s3-test", text:"Do the Roadmap Placement Quiz to define your level",
-         hint:"<b>Take it once you've finished all the modules.</b> Note down the starting level it gives you."}
+        {id:"s3-test", text:"Take the Roadmap Placement Quiz, or start at Month 1", optional:true,
+         hint:"Both paths are right. Take the quiz if you'd like to check whether you can skip ahead, or <b>simply begin at Level 1, Month 1</b> like most members do."}
       ],
       links:[{label:"Do the Roadmap Placement Quiz", url:SPACE_URL.assessment}],
       footnote:'If something is unclear or you have questions about your quiz results, you can <a href="'+SPACE_URL.assessment+'" target="_blank" rel="noopener">book an assessment call</a>.'
@@ -561,6 +566,7 @@
       return '<li><label'+(t.important ? ' class="important"' : '')+'>'+
         '<input type="checkbox" data-task="'+t.id+'"><span>'+t.text+
         (t.important ? '<span class="req">REQUIRED</span>' : '')+
+        (t.optional ? '<span class="opt">OPTIONAL</span>' : '')+
         (t.hint ? '<span class="hint">'+t.hint+'</span>' : '')+'</span></label>'+
         (t.link ? '<a class="task-link" href="'+t.link.url+'" target="_blank" rel="noopener">'+t.link.label+' <span class="arrow">↗</span></a>' : '')+
         '</li>';
